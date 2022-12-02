@@ -37,7 +37,8 @@ class MyApp extends StatelessWidget {
         //     surface: surface,
         //     onSurface: onSurface,
         //     ),
-        primaryColor: Colors.deepPurple,
+        // primaryColor: Colors.deepPurple,
+        primaryColor: const Color(0xff8687e7),
         brightness: Brightness.dark,
 
         // Define the default font family.

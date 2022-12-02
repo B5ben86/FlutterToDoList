@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uptodo/models/task_model/task_model.dart';
 import 'package:uptodo/pages/home_pages/index_page_body/widgets/task_list_widgets/task_info_item/classify_widget.dart';
+import 'package:uptodo/widgets/round_check_box_widget.dart';
 
 import 'priority_widget.dart';
 
@@ -13,6 +14,8 @@ class TaskInfoItemWidget extends StatefulWidget {
 }
 
 class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
+  bool checkedStatus = false;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -33,15 +36,23 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text('left'),
-              const SizedBox(
-                width: 12,
-              ),
+              buildCheckBox(),
               buildRightWidget(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildCheckBox() {
+    return RoundCheckBoxWidget(
+      checkedStatus,
+      (checkedStatusNew) {
+        setState(() {
+          checkedStatus = !checkedStatus;
+        });
+      },
     );
   }
 
