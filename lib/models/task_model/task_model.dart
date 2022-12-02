@@ -18,8 +18,18 @@ class TaskModel {
   DateTime dateTime;
   ETaskPriority priority;
   CategoryModel categoryModel;
+  bool? finished = false;
 
-  TaskModel(this.taskName, this.dateTime, this.priority, this.categoryModel);
+  TaskModel(this.taskName, this.dateTime, this.priority, this.categoryModel,
+      this.finished);
+
+  void copyFrom(TaskModel taskModel) {
+    taskName = taskModel.taskName;
+    dateTime = taskModel.dateTime;
+    priority = taskModel.priority;
+    categoryModel = taskModel.categoryModel;
+    finished = taskModel.finished;
+  }
 
   factory TaskModel.fromJson(Map<String, dynamic> json) =>
       _$TaskModelFromJson(json);

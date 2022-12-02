@@ -11,6 +11,7 @@ TaskModel _$TaskModelFromJson(Map<String, dynamic> json) => TaskModel(
       DateTime.parse(json['dateTime'] as String),
       $enumDecode(_$ETaskPriorityEnumMap, json['priority']),
       CategoryModel.fromJson(json['categoryModel'] as Map<String, dynamic>),
+      json['finished'] as bool?,
     )..id = json['id'] as String;
 
 Map<String, dynamic> _$TaskModelToJson(TaskModel instance) => <String, dynamic>{
@@ -19,6 +20,7 @@ Map<String, dynamic> _$TaskModelToJson(TaskModel instance) => <String, dynamic>{
       'dateTime': instance.dateTime.toIso8601String(),
       'priority': _$ETaskPriorityEnumMap[instance.priority]!,
       'categoryModel': instance.categoryModel,
+      'finished': instance.finished,
     };
 
 const _$ETaskPriorityEnumMap = {

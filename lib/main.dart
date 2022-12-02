@@ -3,8 +3,10 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:uptodo/generated/l10n.dart';
 import 'package:uptodo/pages/welcome_pages/welcome_page.dart';
+import 'package:uptodo/utility/get_it_initial/GetItInitial.dart';
 
 void main() {
+  setupGetIt();
   runApp(const MyApp());
 }
 

@@ -80,7 +80,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     await UserModelsHandler()
                         .loginSucceedHandle(model.userName!, model.password!);
 
-                    //TODO: 跳转到 home 页面
                     if (mounted) {
                       NavigateHandler().push(context, const HomePage());
                     }

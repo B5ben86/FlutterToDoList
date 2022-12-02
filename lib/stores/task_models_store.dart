@@ -11,40 +11,64 @@ class TaskModelsStore = _TaskModelsStore with _$TaskModelsStore;
 
 abstract class _TaskModelsStore with Store {
   @observable
-  Map<String, TaskModel> _taskModelMap = {};
+  ObservableMap<String, TaskModel> taskModelMap = ObservableMap.of({});
 
   @action
   void insertTaskModel(TaskModel taskModel) {
-    _taskModelMap[taskModel.id] = taskModel;
+    taskModelMap[taskModel.id] = taskModel;
     _saveToDatabase();
   }
 
   @action
   void deleteTaskModel(String id) {
-    _taskModelMap.remove(id);
+    taskModelMap.remove(id);
     _saveToDatabase();
   }
 
   @action
-  void clear() {
-    _taskModelMap.clear();
+  void updateTaskModel(TaskModel taskModel) {
+    if (taskModelMap[taskModel.id] != null) {
+      taskModelMap[taskModel.id]?.copyFrom(taskModel);
+      _saveToDatabase();
+    }
   }
 
+  @action
+  void updateTaskModelFinished(String id, bool finished) {
+    if (taskModelMap[id]?.finished != finished) {
+      taskModelMap[id]?.finished = finished;
+      _saveToDatabase();
+    }
+  }
+
+  @action
+  void clear() {
+    taskModelMap.clear();
+  }
+
+  @computed
+  bool get isEmpty => taskModelMap.isEmpty;
+
+  @computed
+  List<TaskModel> get getTaskModelList => taskModelMap.values.toList();
+
+  TaskModel? getTaskModel(String id) => taskModelMap[id];
+
   Future<void> loadFromDatabase() async {
-    _taskModelMap.clear();
+    taskModelMap.clear();
     var mapRead = await TaskModelMockDatabase.loadTaskModelMapFromDatabase();
     if (mapRead != null) {
       //map 读取成功，转换成 taskModelMap
       for (var element in mapRead.values) {
         var taskModel = TaskModel.fromJson(element);
-        _taskModelMap[taskModel.id] = taskModel;
+        taskModelMap[taskModel.id] = taskModel;
       }
 
-      debugPrint('Task Model Map 读取成功 : ${jsonEncode(_taskModelMap)}');
+      debugPrint('Task Model Map 读取成功 : ${jsonEncode(taskModelMap)}');
     }
   }
 
   Future<void> _saveToDatabase() async {
-    await TaskModelMockDatabase.storeTaskModelMapToDatabase(_taskModelMap);
+    await TaskModelMockDatabase.storeTaskModelMapToDatabase(taskModelMap);
   }
 }

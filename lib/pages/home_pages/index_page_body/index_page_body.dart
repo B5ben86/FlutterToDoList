@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:uptodo/models/model_handlers/task_models_handler.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
+import 'package:uptodo/stores/task_models_store.dart';
 import 'package:uptodo/widgets/empty_divider_widget.dart';
 
 import 'widgets/no_tasks_widget.dart';
@@ -16,11 +18,15 @@ class IndexPageBody extends StatefulWidget {
 class _IndexPageBodyState extends State<IndexPageBody> {
   @override
   Widget build(BuildContext context) {
-    if (TaskModelsHandler().isEmpty()) {
-      return const NoTasksWidget();
-    } else {
-      return buildBodyContent();
-    }
+    return Observer(
+      builder: (observerContext) {
+        if (GetIt.I<TaskModelsStore>().isEmpty) {
+          return const NoTasksWidget();
+        } else {
+          return buildBodyContent();
+        }
+      },
+    );
   }
 
   Widget buildBodyContent() {
@@ -42,14 +48,23 @@ class _IndexPageBodyState extends State<IndexPageBody> {
   }
 
   Widget buildListView() {
-    var taskModels = TaskModelsHandler().getTaskModelList();
+    // var taskModels = GetIt.I<TaskModelsStore>().getTaskModelList;
     return Expanded(
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          var taskModel = taskModels[index];
-          return TaskInfoItemWidget(taskModel);
+      child: Observer(
+        builder: (context) {
+          debugPrint(
+              'tasks amount : ${GetIt.I<TaskModelsStore>().taskModelMap.length}');
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              var taskModel = GetIt.I<TaskModelsStore>()
+                  .taskModelMap
+                  .values
+                  .toList()[index];
+              return TaskInfoItemWidget(taskModel);
+            },
+            itemCount: GetIt.I<TaskModelsStore>().taskModelMap.length,
+          );
         },
-        itemCount: TaskModelsHandler().tasksAmount(),
       ),
     );
   }
