@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:uptodo/models/task_model/category_model.dart';
-import 'package:uptodo/models/task_model/task_model.dart';
-import 'package:uptodo/stores/task_models_store.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_task_popup_dialog/add_task_popup_dialog_widget.dart';
 
 import 'calendar_page_body/calendar_page_body.dart';
 import 'focus_page_body/focus_page_body.dart';
@@ -94,15 +91,17 @@ class _HomePageState extends State<HomePage> {
   void addButtonHandle() {
     if (currentTapIndex == 0) {
       debugPrint('press add button in index page');
-      var taskModelNew = TaskModel(
-        'taskName',
-        DateTime.now(),
-        ETaskPriority.high,
-        CategoryModel('name', 1, 3),
-        false,
-      );
-      // context.read<TaskModelsStore>().insertTaskModel(taskModelNew);
-      GetIt.I<TaskModelsStore>().insertTaskModel(taskModelNew);
+      // var taskModelNew = TaskModel(
+      //   'taskName',
+      //   DateTime.now(),
+      //   ETaskPriority.high,
+      //   CategoryModel('name', 1, 3),
+      //   false,
+      // );
+      // // context.read<TaskModelsStore>().insertTaskModel(taskModelNew);
+      // GetIt.I<TaskModelsStore>().insertTaskModel(taskModelNew);
+
+      showAddTaskPopupDialogWidget(context);
     }
   }
 }

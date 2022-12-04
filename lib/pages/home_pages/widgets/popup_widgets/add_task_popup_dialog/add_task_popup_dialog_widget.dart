@@ -1,0 +1,64 @@
+import 'package:flutter/material.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_task_popup_dialog/items/build_task_detail_setting_widget.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_task_popup_dialog/items/build_task_info_input_text_field_widget.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_task_popup_dialog/items/build_title_text_widget.dart';
+
+void showAddTaskPopupDialogWidget(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        elevation: 0,
+        insetPadding: const EdgeInsets.only(left: 8, right: 8),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          height: 285,
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(25.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                buildTitleTextWidget(),
+                const SizedBox(
+                  height: 14,
+                ),
+                buildTaskInfoInputTextFieldWidget(
+                  'Please Input Task Name',
+                  (text) {
+                    debugPrint('onEditChanged : $text');
+                  },
+                  (text) {
+                    debugPrint('onSubmitted : $text');
+                  },
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                buildTaskInfoInputTextFieldWidget(
+                  'Please Input Task Description',
+                  (text) {
+                    debugPrint('onEditChanged : $text');
+                  },
+                  (text) {
+                    debugPrint('onSubmitted : $text');
+                  },
+                ),
+                const SizedBox(
+                  height: 14,
+                ),
+                buildTaskDetailSettingWidget(context),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}

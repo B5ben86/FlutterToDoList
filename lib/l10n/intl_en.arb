@@ -37,5 +37,8 @@
   "home_page_bottom_app_bar_profile": "Profile",
 
   "index_body_empty_notice": "What do you want to do today?",
-  "index_body_empty_tips": "Tap + to add your tasks"
+  "index_body_empty_tips": "Tap + to add your tasks",
+
+  "index_body_task_list_header_section_task_type_today": "Today",
+  "index_body_task_list_header_section_task_type_completed": "Completed"
 }

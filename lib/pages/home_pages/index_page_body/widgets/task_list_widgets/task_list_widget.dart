@@ -17,7 +17,7 @@ class TaskListWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               if (index == 0) {
                 return const TaskClassifyHeaderSectionWidget(
-                    EHeaderSectionType.completed);
+                    EHeaderSectionType.today);
               } else {
                 var taskModel = GetIt.I<TaskModelsStore>()
                     .taskModelMap

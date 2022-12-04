@@ -34,6 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "What do you want to do today?"),
         "index_body_empty_tips":
             MessageLookupByLibrary.simpleMessage("Tap + to add your tasks"),
+        "index_body_task_list_header_section_task_type_completed":
+            MessageLookupByLibrary.simpleMessage("Completed"),
+        "index_body_task_list_header_section_task_type_today":
+            MessageLookupByLibrary.simpleMessage("Today"),
         "intro_page_back": MessageLookupByLibrary.simpleMessage("BACK"),
         "intro_page_last_description_detail":
             MessageLookupByLibrary.simpleMessage(

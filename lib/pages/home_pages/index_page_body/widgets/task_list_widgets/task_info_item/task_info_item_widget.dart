@@ -29,7 +29,7 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
     return Card(
       elevation: 0,
       margin: const EdgeInsets.only(bottom: 16),
-      color: const Color(0xFF363636),
+      color: Theme.of(context).cardColor,
       child: SizedBox(
         height: 72,
         child: Padding(
@@ -111,12 +111,21 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
     );
   }
 
+  //TODO: 完善日期显示格式
+  String dateTimeFormatter(DateTime dateTime) {
+    var dateTimeString = '';
+    dateTimeString += '${dateTime.month}/${dateTime.day}';
+    dateTimeString += ' ${dateTime.hour}:${dateTime.minute}';
+
+    return dateTimeString;
+  }
+
   Widget buildTaskTime() {
-    return const Padding(
-      padding: EdgeInsets.only(top: 6),
+    return Padding(
+      padding: const EdgeInsets.only(top: 6),
       child: Text(
-        'Today At 16:45',
-        style: TextStyle(color: Color(0xffafafaf), fontSize: 14),
+        dateTimeFormatter(widget.taskModel.dateTime),
+        style: const TextStyle(color: Color(0xffafafaf), fontSize: 14),
       ),
     );
   }

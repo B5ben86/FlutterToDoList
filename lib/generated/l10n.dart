@@ -409,6 +409,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Today`
+  String get index_body_task_list_header_section_task_type_today {
+    return Intl.message(
+      'Today',
+      name: 'index_body_task_list_header_section_task_type_today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get index_body_task_list_header_section_task_type_completed {
+    return Intl.message(
+      'Completed',
+      name: 'index_body_task_list_header_section_task_type_completed',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

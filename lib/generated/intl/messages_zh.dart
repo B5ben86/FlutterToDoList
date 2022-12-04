@@ -34,6 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("今天有什么要做的吗？"),
         "index_body_empty_tips":
             MessageLookupByLibrary.simpleMessage("点击 + 按钮，添加今天的任务吧"),
+        "index_body_task_list_header_section_task_type_completed":
+            MessageLookupByLibrary.simpleMessage("已完成"),
+        "index_body_task_list_header_section_task_type_today":
+            MessageLookupByLibrary.simpleMessage("今天"),
         "intro_page_back": MessageLookupByLibrary.simpleMessage("返回"),
         "intro_page_last_description_detail":
             MessageLookupByLibrary.simpleMessage("请登录您的帐号, 或注册新账号"),

@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
         //     ),
         // primaryColor: Colors.deepPurple,
         primaryColor: const Color(0xff8687e7),
+        cardColor: const Color(0xFF363636),
         brightness: Brightness.dark,
 
         // Define the default font family.
