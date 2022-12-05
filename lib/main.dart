@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:uptodo/generated/l10n.dart';
 import 'package:uptodo/pages/welcome_pages/welcome_page.dart';
 import 'package:uptodo/utility/get_it_initial/GetItInitial.dart';
+import 'package:uptodo/utility/tools/navigation_service.dart';
 
 void main() {
   setupGetIt();
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: NavigationService.navigatorKey,
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,

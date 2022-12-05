@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_task_popup_dialog/items/build_task_detail_setting_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_task_popup_dialog/items/build_task_info_input_text_field_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_task_popup_dialog/items/build_title_text_widget.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_widgets/calendar_popup_dialog/calendar_popup_dialog_widget.dart';
 
 void showAddTaskPopupDialogWidget(BuildContext context) {
   showDialog(
@@ -16,7 +17,7 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
             color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(16),
           ),
-          height: 285,
+          height: 250,
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.all(25.0),
@@ -31,18 +32,7 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                 ),
                 buildTaskInfoInputTextFieldWidget(
                   'Please Input Task Name',
-                  (text) {
-                    debugPrint('onEditChanged : $text');
-                  },
-                  (text) {
-                    debugPrint('onSubmitted : $text');
-                  },
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                buildTaskInfoInputTextFieldWidget(
-                  'Please Input Task Description',
+                  true,
                   (text) {
                     debugPrint('onEditChanged : $text');
                   },
@@ -53,7 +43,25 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                 const SizedBox(
                   height: 14,
                 ),
-                buildTaskDetailSettingWidget(context),
+                buildTaskInfoInputTextFieldWidget(
+                  'Please Input Task Description',
+                  false,
+                  (text) {
+                    debugPrint('onEditChanged : $text');
+                  },
+                  (text) {
+                    debugPrint('onSubmitted : $text');
+                  },
+                ),
+                const SizedBox(
+                  height: 14,
+                ),
+                buildTaskDetailSettingWidget(context, (itemType) {
+                  if (itemType == ETaskSettingItemType.clock) {
+                    showCalendarPopupDialogWidget(context);
+                  }
+                  debugPrint('Task Detail Setting Item on pressed : $itemType');
+                }),
               ],
             ),
           ),
