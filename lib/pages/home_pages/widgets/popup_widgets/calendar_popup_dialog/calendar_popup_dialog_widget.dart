@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:uptodo/utility/tools/navigation_service.dart';
 
 void showCalendarPopupDialogWidget(BuildContext context) {
   showDialog(
@@ -21,9 +22,12 @@ void showCalendarPopupDialogWidget(BuildContext context) {
                 color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(16),
               ),
-              height: 400,
+              height: 470,
               width: double.infinity,
               child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TableCalendar(
                     focusedDay: focusedDayTmp,
@@ -40,12 +44,6 @@ void showCalendarPopupDialogWidget(BuildContext context) {
                         });
                       }
 
-                      debugPrint(focusedDay.toIso8601String());
-                      debugPrint(selectedDay.toIso8601String());
-
-                      debugPrint(focusedDayTmp.toIso8601String());
-                      debugPrint(selectedDayTmp.toIso8601String());
-
                       setState(() {
                         buttonText = focusedDay.day.toString();
                       });
@@ -54,9 +52,35 @@ void showCalendarPopupDialogWidget(BuildContext context) {
                       focusedDayTmp = focusedDay;
                     },
                   ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text(buttonText),
+                  const SizedBox(
+                    height: 23,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          fixedSize: const Size(153, 48),
+                        ),
+                        onPressed: () {},
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                            color: themeContext().primaryColor,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: themeContext().primaryColor,
+                          fixedSize: const Size(153, 48),
+                          textStyle: const TextStyle(fontSize: 16),
+                        ),
+                        onPressed: () {},
+                        child: const Text('Choose Time'),
+                      ),
+                    ],
                   ),
                 ],
               ),
