@@ -22,6 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "calendar_popup_dialog_button_cancel":
+            MessageLookupByLibrary.simpleMessage("Cancel"),
+        "calendar_popup_dialog_button_choose_time":
+            MessageLookupByLibrary.simpleMessage("Choose Time"),
         "home_page_bottom_app_bar_calendar":
             MessageLookupByLibrary.simpleMessage("Calendar"),
         "home_page_bottom_app_bar_focus":

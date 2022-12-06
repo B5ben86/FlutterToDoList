@@ -58,7 +58,9 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                 ),
                 buildTaskDetailSettingWidget(context, (itemType) {
                   if (itemType == ETaskSettingItemType.clock) {
-                    showCalendarPopupDialogWidget(context);
+                    showCalendarPopupDialogWidget(context, ((selectedDay) {
+                      debugPrint('selected day : ${selectedDay.toLocal()}');
+                    }));
                   }
                   debugPrint('Task Detail Setting Item on pressed : $itemType');
                 }),

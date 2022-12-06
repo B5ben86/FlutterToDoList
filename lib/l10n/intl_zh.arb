@@ -40,5 +40,8 @@
   "index_body_empty_tips": "点击 + 按钮，添加今天的任务吧",
 
   "index_body_task_list_header_section_task_type_today": "今天",
-  "index_body_task_list_header_section_task_type_completed": "已完成"
+  "index_body_task_list_header_section_task_type_completed": "已完成",
+
+  "calendar_popup_dialog_button_cancel": "取消",
+  "calendar_popup_dialog_button_choose_time": "选择时间"
 }

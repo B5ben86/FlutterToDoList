@@ -429,6 +429,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Cancel`
+  String get calendar_popup_dialog_button_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'calendar_popup_dialog_button_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Time`
+  String get calendar_popup_dialog_button_choose_time {
+    return Intl.message(
+      'Choose Time',
+      name: 'calendar_popup_dialog_button_choose_time',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
