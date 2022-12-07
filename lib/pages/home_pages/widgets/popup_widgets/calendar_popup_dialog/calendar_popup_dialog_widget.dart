@@ -6,7 +6,7 @@ import 'package:uptodo/pages/home_pages/widgets/popup_widgets/popup_common_widge
 import 'package:uptodo/utility/tools/navigation_service.dart';
 
 void showCalendarPopupDialogWidget(
-    BuildContext context, Function(DateTime) onDaySelected) {
+    BuildContext context, Function(DateTime) onDayTimeSelected) {
   showDialog(
     context: context,
     builder: (context) {
@@ -48,8 +48,9 @@ void showCalendarPopupDialogWidget(
                             color: themeContext().primaryColor,
                             shape: BoxShape.circle)),
                     focusedDay: focusedDayTmp,
-                    firstDay: DateTime.utc(2021, 1, 1),
-                    lastDay: DateTime.utc(2024, 1, 1),
+                    firstDay: DateTime.now()
+                        .add(const Duration(days: -30)), //TODO: 可选前后一个月的时间，具体待定
+                    lastDay: DateTime.now().add(const Duration(days: 30)),
                     selectedDayPredicate: (day) {
                       return isSameDay(selectedDayTmp, day);
                     },
@@ -74,14 +75,18 @@ void showCalendarPopupDialogWidget(
                     (() {
                       Navigator.pop(context);
                     }),
-                    (() async {
-                      // showChooseTimePopupDialogWidget(context);
-                      var timeOfDayNew =
-                          await showChooseTimePopupDialogWidget(context);
-                      if (timeOfDayNew != null) {
-                        //TODO: 将日期和时间组合成 DateTime
-                        debugPrint(timeOfDayNew.toString());
-                      }
+                    (() {
+                      showChooseTimePopupDialogWidget(context, ((timeOfDayNew) {
+                        var selectedDateTime = DateTime(
+                            selectedDayTmp.year,
+                            selectedDayTmp.month,
+                            selectedDayTmp.day,
+                            timeOfDayNew.hour,
+                            timeOfDayNew.minute);
+                        Navigator.pop(context);
+
+                        onDayTimeSelected(selectedDateTime);
+                      }));
                     }),
                   ),
                 ],
