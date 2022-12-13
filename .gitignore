@@ -43,5 +43,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+#生成文件忽略
 lib/models/task_model/*.g.dart
 lib/stores/*.g.dart
+
+lib/generated/*
