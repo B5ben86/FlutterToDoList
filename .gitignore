@@ -43,3 +43,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+lib/models/task_model/*.g.dart
+lib/stores/*.g.dart
