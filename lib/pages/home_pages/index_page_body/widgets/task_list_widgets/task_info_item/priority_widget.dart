@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:uptodo/models/task_model/task_model.dart';
 
 class PriorityWidget extends StatelessWidget {
   final Function() onPressed;
-  final ETaskPriority priority;
+  final int priority;
   const PriorityWidget(this.priority, this.onPressed, {super.key});
 
   @override
@@ -29,7 +28,7 @@ class PriorityWidget extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              priority.index.toString(),
+              priority.toString(),
               style: const TextStyle(color: Colors.white, fontSize: 12),
             ),
           ],

@@ -1,4 +1,6 @@
 {
+  "common_cancel": "取消",
+
   "intro_page_skip": "跳过",
   "intro_page_next": "下一步",
   "intro_page_back": "返回",
@@ -42,6 +44,7 @@
   "index_body_task_list_header_section_task_type_today": "今天",
   "index_body_task_list_header_section_task_type_completed": "已完成",
 
-  "calendar_popup_dialog_button_cancel": "取消",
-  "calendar_popup_dialog_button_choose_time": "选择时间"
+  "calendar_popup_dialog_button_choose_time": "选择时间",
+
+  "choose_task_priority_popup_dialog_save_button_text": "保存"
 }

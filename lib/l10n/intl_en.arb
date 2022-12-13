@@ -1,4 +1,6 @@
 {
+  "common_cancel":"Cancel",
+
   "intro_page_skip": "SKIP",
   "intro_page_next": "NEXT",
   "intro_page_back": "BACK",
@@ -42,6 +44,7 @@
   "index_body_task_list_header_section_task_type_today": "Today",
   "index_body_task_list_header_section_task_type_completed": "Completed",
 
-  "calendar_popup_dialog_button_cancel": "Cancel",
-  "calendar_popup_dialog_button_choose_time": "Choose Time"
+  "calendar_popup_dialog_button_choose_time": "Choose Time",
+
+  "choose_task_priority_popup_dialog_save_button_text": "Save"
 }

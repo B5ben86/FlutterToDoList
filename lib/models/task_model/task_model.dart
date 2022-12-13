@@ -4,19 +4,28 @@ import 'package:uuid/uuid.dart';
 
 part 'task_model.g.dart';
 
-enum ETaskPriority {
-  low,
-  medium,
-  high,
-  emergency,
-}
+// enum ETaskPriority {
+//   one,
+//   two,
+//   three,
+//   four,
+//   five,
+//   six,
+//   seven,
+//   eight,
+//   nine,
+//   ten,
+//   eleven,
+// }
+
+const MaxPriority = 10;
 
 @JsonSerializable()
 class TaskModel {
   String id = const Uuid().v1();
   String taskName;
   DateTime dateTime;
-  ETaskPriority priority;
+  int priority;
   CategoryModel categoryModel;
   bool? finished = false;
 
