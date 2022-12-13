@@ -46,5 +46,9 @@
 
   "calendar_popup_dialog_button_choose_time": "Choose Time",
 
-  "choose_task_priority_popup_dialog_save_button_text": "Save"
+  "choose_task_priority_popup_dialog_title": "Choose Priority",
+  "choose_task_priority_popup_dialog_save_button_text": "Save",
+
+  "choose_category_popup_dialog_title": "Choose Category",
+  "choose_category_popup_dialog_add_button_text": "Add Category"
 }

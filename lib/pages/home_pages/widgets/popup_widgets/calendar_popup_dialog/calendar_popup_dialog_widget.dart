@@ -70,7 +70,7 @@ void showCalendarPopupDialogWidget(
                     height: 23,
                   ),
                   buildDialogBottomButtonsWidget(
-                    S.current.calendar_popup_dialog_button_cancel,
+                    S.current.common_cancel,
                     S.current.calendar_popup_dialog_button_choose_time,
                     (() {
                       Navigator.pop(context);

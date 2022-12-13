@@ -50,6 +50,7 @@ class CategoryIconLibWidget {
       8: Icons.movie_outlined,
       9: Icons.traffic_outlined,
       10: Icons.medication_outlined,
+      11: Icons.home_outlined,
     },
   );
 
@@ -69,10 +70,11 @@ class CategoryIconLibWidget {
     8: [Colors.lime, Colors.limeAccent],
     9: [Colors.pink, Colors.pinkAccent],
     10: [Colors.amber, Colors.amberAccent],
+    11: [Colors.deepPurple, Colors.deepPurpleAccent],
   });
 
   List<ColorSwatch<int>> getIconColorViaColorIndex(int colorIndex) {
-    if (colorIndex <= 10) {
+    if (colorIndex <= 11) {
       return categoryIconsColorLib[colorIndex] ??
           [Colors.yellow, Colors.yellowAccent];
     } else {

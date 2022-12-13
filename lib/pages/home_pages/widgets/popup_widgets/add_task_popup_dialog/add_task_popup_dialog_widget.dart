@@ -3,6 +3,7 @@ import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_task_popup_dia
 import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_task_popup_dialog/items/build_task_info_input_text_field_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_task_popup_dialog/items/build_title_text_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_widgets/calendar_popup_dialog/calendar_popup_dialog_widget.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_widgets/choose_category_popup_dialog/choose_category_popup_dialog_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_widgets/choose_task_priority_popup_dialog/choose_task_priority_popup_dialog_widget.dart';
 
 void showAddTaskPopupDialogWidget(BuildContext context) {
@@ -58,13 +59,27 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                   height: 14,
                 ),
                 buildTaskDetailSettingWidget(context, (itemType) {
-                  if (itemType == ETaskSettingItemType.clock) {
-                    showCalendarPopupDialogWidget(context, ((selectedDay) {
-                      debugPrint('selected day : ${selectedDay.toLocal()}');
-                    }));
-                  } else if (itemType == ETaskSettingItemType.priority) {
-                    showChooseTaskPriorityPopupDialogWidget(context, 1);
+                  switch (itemType) {
+                    case ETaskSettingItemType.clock:
+                      showCalendarPopupDialogWidget(context, ((selectedDay) {
+                        debugPrint('selected day : ${selectedDay.toLocal()}');
+                      }));
+                      break;
+                    case ETaskSettingItemType.tag:
+                      showChooseCategoryPopupDialogWidget(
+                          context, ((categoryModel) {}));
+                      break;
+                    case ETaskSettingItemType.priority:
+                      showChooseTaskPriorityPopupDialogWidget(context, 0,
+                          ((taskPriorityNew) {
+                        debugPrint('taskPriorityNew = $taskPriorityNew');
+                      }));
+                      break;
+                    case ETaskSettingItemType.confirm:
+                      // TODO: Handle this case.
+                      break;
                   }
+
                   debugPrint('Task Detail Setting Item on pressed : $itemType');
                 }),
               ],

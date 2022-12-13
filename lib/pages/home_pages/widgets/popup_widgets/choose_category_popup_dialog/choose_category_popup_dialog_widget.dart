@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:uptodo/generated/l10n.dart';
-import 'package:uptodo/models/task_model/task_model.dart';
-import 'package:uptodo/pages/home_pages/widgets/popup_widgets/popup_common_widgets/popup_dialog_bottom_buttons_widget.dart';
-import 'package:uptodo/utility/tools/navigation_service.dart';
+import 'package:uptodo/models/task_model/category_model.dart';
 
-void showChooseTaskPriorityPopupDialogWidget(BuildContext context,
-    int taskPriority, Function(int taskPriorityNew) taskPrioritySelected) {
+void showChooseCategoryPopupDialogWidget(BuildContext context,
+    Function(CategoryModel categoryModel) categorySelected) {
   showDialog(
     context: context,
     builder: (context) {
@@ -28,21 +26,6 @@ void showChooseTaskPriorityPopupDialogWidget(BuildContext context,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   _buildTitle(),
-                  PriorityGridViewWidget(taskPriority, (selectedIndexNew) {
-                    setState(() {
-                      taskPriority = selectedIndexNew;
-                    });
-                  }),
-                  buildDialogBottomButtonsWidget(
-                      S.current.common_cancel,
-                      S.current
-                          .choose_task_priority_popup_dialog_save_button_text,
-                      (() {
-                    Navigator.pop(context);
-                  }), (() {
-                    taskPrioritySelected(taskPriority);
-                    Navigator.pop(context);
-                  })),
                   const SizedBox(
                     height: 8,
                   ),
@@ -63,7 +46,7 @@ Widget _buildTitle() {
         height: 20,
       ),
       Text(
-        S.current.choose_task_priority_popup_dialog_title,
+        S.current.choose_category_popup_dialog_title,
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
@@ -114,9 +97,9 @@ class _PriorityGridViewWidgetState extends State<PriorityGridViewWidget> {
             childAspectRatio: 1,
             mainAxisSpacing: 16,
             crossAxisSpacing: 16),
-        itemCount: MaxPriority,
+        itemCount: 10,
         itemBuilder: ((context, index) {
-          return priorityItem(index, index == widget.priorityIndex, (() {
+          return priorityItem((() {
             widget.onSelected(index);
           }));
         }),
@@ -124,9 +107,7 @@ class _PriorityGridViewWidgetState extends State<PriorityGridViewWidget> {
     );
   }
 
-  Widget priorityItem(int priorityIndex, bool selected, Function() onPressed) {
-    var backgroundColor =
-        selected ? themeContext().primaryColor : const Color(0xff272727);
+  Widget priorityItem(Function() onPressed) {
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xff272727),
@@ -134,7 +115,7 @@ class _PriorityGridViewWidgetState extends State<PriorityGridViewWidget> {
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white, backgroundColor: backgroundColor),
+            foregroundColor: Colors.white, backgroundColor: Colors.red),
         onPressed: onPressed,
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -148,7 +129,7 @@ class _PriorityGridViewWidgetState extends State<PriorityGridViewWidget> {
               height: 5,
             ),
             Text(
-              priorityIndex.toString(),
+              1.toString(),
               style: const TextStyle(
                 fontSize: 16,
               ),
