@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:uptodo/utility/tools/navigation_service.dart';
 
-Widget buildTaskInfoInputTextFieldWidget(String placeHolderText, bool autoFocus,
-    Function(String text) onEditChanged, Function(String text) onSubmitted) {
+Widget buildPopupDialogInputTextFieldWidget(
+    String placeHolderText,
+    bool autoFocus,
+    Function(String text) onEditChanged,
+    Function(String text) onSubmitted) {
   return SizedBox(
     height: 43,
     child: TextField(

@@ -50,5 +50,12 @@
   "choose_task_priority_popup_dialog_save_button_text": "保存",
 
   "choose_category_popup_dialog_title": "任务分类",
-  "choose_category_popup_dialog_add_button_text": "添加分类"
+  "choose_category_popup_dialog_add_button_text": "添加分类",
+
+  "add_category_popup_dialog_title": "创建新分类",
+  "add_category_popup_dialog_name_title": "分类名称",
+  "add_category_popup_dialog_name_textfield_placeholder": "请输入新分类名称",
+  "add_category_popup_dialog_icon_title": "图标",
+  "add_category_popup_dialog_color_title": "颜色",
+  "add_category_popup_dialog_confirm_button_text": "创建"
 }

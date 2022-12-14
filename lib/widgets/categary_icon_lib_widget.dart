@@ -59,26 +59,25 @@ class CategoryIconLibWidget {
   }
 
   var categoryIconsColorLib = Map.of({
-    0: [Colors.yellow, Colors.yellowAccent],
-    1: [Colors.green, Colors.greenAccent],
-    2: [Colors.blue, Colors.blueAccent],
-    3: [Colors.purple, Colors.purpleAccent],
-    4: [Colors.indigo, Colors.indigoAccent],
-    5: [Colors.teal, Colors.tealAccent],
-    6: [Colors.orange, Colors.orangeAccent],
-    7: [Colors.red, Colors.redAccent],
-    8: [Colors.lime, Colors.limeAccent],
-    9: [Colors.pink, Colors.pinkAccent],
-    10: [Colors.amber, Colors.amberAccent],
-    11: [Colors.deepPurple, Colors.deepPurpleAccent],
+    0: [const Color(0xFFCCFF80), const Color(0xFF21A300)],
+    1: [const Color(0xFFff9680), const Color(0xFFA31D00)],
+    2: [const Color(0xFF80FFFF), const Color(0xFF00A32F)],
+    3: [const Color(0xFF80FFD9), const Color(0xFF00A372)],
+    4: [const Color(0xFF809CFF), const Color(0xFF0055A3)],
+    5: [const Color(0xFFFF80EB), const Color(0xFFA30089)],
+    6: [const Color(0xFF80FFA3), const Color(0xFF00A3A3)],
+    7: [const Color(0xFF80D1FF), const Color(0xFF0069A3)],
+    8: [const Color(0xFFFFCC80), const Color(0xFFA36200)],
+    9: [const Color(0xFF80FFD1), const Color(0xFF00A369)],
+    10: [const Color(0xFFFC80FF), const Color(0xFFA000A3)],
   });
 
-  List<ColorSwatch<int>> getIconColorViaColorIndex(int colorIndex) {
-    if (colorIndex <= 11) {
+  List<Color> getIconColorViaColorIndex(int colorIndex) {
+    if (colorIndex <= 10) {
       return categoryIconsColorLib[colorIndex] ??
-          [Colors.yellow, Colors.yellowAccent];
+          [const Color(0xFFCCFF80), const Color(0xFF21A300)];
     } else {
-      return [Colors.yellow, Colors.yellowAccent];
+      return [const Color(0xFFCCFF80), const Color(0xFF21A300)];
     }
   }
 }

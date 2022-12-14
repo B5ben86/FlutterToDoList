@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:uptodo/generated/l10n.dart';
+import 'package:uptodo/models/model_handlers/category_models_handler.dart';
 import 'package:uptodo/models/task_model/category_model.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_category_popup_dialog/add_category_popup_dialog_widget.dart';
+import 'package:uptodo/utility/tools/navigation_service.dart';
+import 'package:uptodo/widgets/categary_icon_lib_widget.dart';
 
 void showChooseCategoryPopupDialogWidget(BuildContext context,
     Function(CategoryModel categoryModel) categorySelected) {
@@ -26,9 +30,14 @@ void showChooseCategoryPopupDialogWidget(BuildContext context,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   _buildTitle(),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  CategoryGridViewWidget((onSelectedCategory) => {}),
+                  _buildAddButton(() => {
+                        showAddCategoryPopupDialogWidget(context,
+                            ((categoryModel) {
+                          debugPrint(
+                              'new category : ${categoryModel.toJson()}');
+                        }))
+                      }),
                 ],
               ),
             ),
@@ -68,38 +77,51 @@ Widget _buildTitle() {
   );
 }
 
-class PriorityGridViewWidget extends StatefulWidget {
-  final int priorityIndex;
-  final Function(int) onSelected;
-  const PriorityGridViewWidget(this.priorityIndex, this.onSelected,
-      {super.key});
-
-  @override
-  State<PriorityGridViewWidget> createState() => _PriorityGridViewWidgetState();
+Widget _buildAddButton(Function() onPressed) {
+  return Padding(
+    padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+    child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: themeContext().primaryColor,
+        minimumSize: const Size.fromHeight(48),
+        textStyle: const TextStyle(fontSize: 16),
+      ),
+      onPressed: onPressed,
+      child: const Text(
+        'Add Category', //TODO:
+      ),
+    ),
+  );
 }
 
-class _PriorityGridViewWidgetState extends State<PriorityGridViewWidget> {
-  var priorityIndexTmp = 0;
+class CategoryGridViewWidget extends StatefulWidget {
+  final Function(int) onSelected;
+  const CategoryGridViewWidget(this.onSelected, {super.key});
 
   @override
+  State<CategoryGridViewWidget> createState() => _CategoryGridViewWidgetState();
+}
+
+class _CategoryGridViewWidgetState extends State<CategoryGridViewWidget> {
+  @override
   void initState() {
-    priorityIndexTmp = widget.priorityIndex;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    var modelList = CategoryModelsHandler().getModelList();
     return Expanded(
       child: GridView.builder(
         padding: const EdgeInsets.only(left: 12, right: 12),
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 90,
-            childAspectRatio: 1,
+            childAspectRatio: 64 / 90,
             mainAxisSpacing: 16,
-            crossAxisSpacing: 16),
-        itemCount: 10,
+            crossAxisSpacing: 30),
+        itemCount: modelList.length,
         itemBuilder: ((context, index) {
-          return priorityItem((() {
+          return categoryItem(modelList[index], (() {
             widget.onSelected(index);
           }));
         }),
@@ -107,36 +129,47 @@ class _PriorityGridViewWidgetState extends State<PriorityGridViewWidget> {
     );
   }
 
-  Widget priorityItem(Function() onPressed) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xff272727),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white, backgroundColor: Colors.red),
-        onPressed: onPressed,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(
-              Icons.flag_outlined,
-              size: 30,
+  Widget categoryItem(CategoryModel categoryModel, Function() onPressed) {
+    var colors = CategoryIconLibWidget()
+        .getIconColorViaColorIndex(categoryModel.colorNum);
+    var iconData =
+        CategoryIconLibWidget().getIconDataViaIconIndex(categoryModel.iconNum);
+    return Column(
+      children: [
+        Container(
+          height: 64,
+          width: 64,
+          decoration: BoxDecoration(
+            color: const Color(0xff272727),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                foregroundColor: colors[1], backgroundColor: colors[0]),
+            onPressed: onPressed,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  iconData,
+                  size: 32,
+                ),
+              ],
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              1.toString(),
-              style: const TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+        const SizedBox(
+          height: 8,
+        ),
+        Text(
+          categoryModel.name,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ],
     );
   }
 }

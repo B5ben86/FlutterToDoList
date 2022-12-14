@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_task_popup_dialog/items/build_task_detail_setting_widget.dart';
-import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_task_popup_dialog/items/build_task_info_input_text_field_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_task_popup_dialog/items/build_title_text_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_widgets/calendar_popup_dialog/calendar_popup_dialog_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_widgets/choose_category_popup_dialog/choose_category_popup_dialog_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_widgets/choose_task_priority_popup_dialog/choose_task_priority_popup_dialog_widget.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_widgets/popup_common_widgets/build_popup_dialog_input_text_field_widget.dart';
 
 void showAddTaskPopupDialogWidget(BuildContext context) {
   showDialog(
@@ -32,7 +32,7 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                 const SizedBox(
                   height: 14,
                 ),
-                buildTaskInfoInputTextFieldWidget(
+                buildPopupDialogInputTextFieldWidget(
                   'Please Input Task Name',
                   true,
                   (text) {
@@ -45,7 +45,7 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                 const SizedBox(
                   height: 14,
                 ),
-                buildTaskInfoInputTextFieldWidget(
+                buildPopupDialogInputTextFieldWidget(
                   'Please Input Task Description',
                   false,
                   (text) {

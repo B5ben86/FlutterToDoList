@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_it/get_it.dart';
 import 'package:uptodo/generated/l10n.dart';
+import 'package:uptodo/models/model_handlers/category_models_handler.dart';
 import 'package:uptodo/models/model_handlers/user_models_handler.dart';
 import 'package:uptodo/pages/home_pages/home_page.dart';
 import 'package:uptodo/pages/login_register_pages/login_page.dart';
@@ -91,6 +92,7 @@ class _IntroLastPageState extends State<IntroLastPage> {
 
     if (loginUserModel != null) {
       GetIt.I<TaskModelsStore>().loadFromDatabase();
+      CategoryModelsHandler().loadFromDatabase();
       await Future.delayed(const Duration(seconds: 1));
       //若已登录，则跳转到 HomePage
       if (mounted) {

@@ -18,20 +18,20 @@ class CategoryModelsHandler {
     _saveToDatabase();
   }
 
-  void deleteTaskModel(String id) {
+  void deleteModel(String id) {
     _modelMap.remove(id);
     _saveToDatabase();
   }
 
-  List<CategoryModel> getTaskModelList() {
+  List<CategoryModel> getModelList() {
     return _modelMap.values.toList();
   }
 
-  CategoryModel? getTaskModel(String id) {
+  CategoryModel? getModel(String id) {
     return _modelMap[id];
   }
 
-  int tasksAmount() {
+  int amount() {
     return _modelMap.length;
   }
 
@@ -44,13 +44,27 @@ class CategoryModelsHandler {
     var mapRead =
         await CategoryModelMockDatabase.loadCategoryModelMapFromDatabase();
     if (mapRead != null) {
-      //map 读取成功，转换成 taskModelMap
+      //map 读取成功，转换成 CategoryModelMap
       for (var element in mapRead.values) {
         var model = CategoryModel.fromJson(element);
         _modelMap[model.id] = model;
       }
 
       debugPrint('Category Model Map 读取成功 : ${jsonEncode(_modelMap)}');
+    } else {
+      //若无数据，则创建 default 数据
+      var defaultModelList = [
+        CategoryModel('Grocery', 0, 0),
+        CategoryModel('Work', 1, 1),
+        CategoryModel('Sport', 2, 2),
+        CategoryModel('Design', 3, 3),
+      ];
+
+      for (var model in defaultModelList) {
+        insertModel(model);
+      }
+
+      debugPrint('Category Model Map 读取为空，创建默认数据 : ${jsonEncode(_modelMap)}');
     }
   }
 
