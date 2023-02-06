@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:uptodo/generated/l10n.dart';
-import 'package:uptodo/pages/home_pages/widgets/popup_widgets/choose_time_popup_dialog/choose_time_popup_dialog_widget.dart';
-import 'package:uptodo/pages/home_pages/widgets/popup_widgets/popup_common_widgets/popup_dialog_bottom_buttons_widget.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/choose_time_popup_dialog/choose_time_popup_dialog_widget.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/popup_common_widgets/popup_dialog_bottom_buttons_widget.dart';
 import 'package:uptodo/utility/tools/navigation_service.dart';
 
 void showCalendarPopupDialogWidget(

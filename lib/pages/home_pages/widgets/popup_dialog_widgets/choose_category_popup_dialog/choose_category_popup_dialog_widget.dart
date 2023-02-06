@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uptodo/generated/l10n.dart';
 import 'package:uptodo/models/model_handlers/category_models_handler.dart';
 import 'package:uptodo/models/task_model/category_model.dart';
-import 'package:uptodo/pages/home_pages/widgets/popup_widgets/add_category_popup_dialog/add_category_popup_dialog_widget.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/add_category_popup_dialog/add_category_popup_dialog_widget.dart';
 import 'package:uptodo/utility/tools/navigation_service.dart';
 import 'package:uptodo/widgets/categary_icon_lib_widget.dart';
 
