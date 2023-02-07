@@ -57,5 +57,8 @@
   "add_category_popup_dialog_name_textfield_placeholder": "Please Input Category Name",
   "add_category_popup_dialog_icon_title": "Category Icon",
   "add_category_popup_dialog_color_title": "Category Color",
-  "add_category_popup_dialog_confirm_button_text": "Create"
+  "add_category_popup_dialog_confirm_button_text": "Create",
+  "add_category_popup_dialog_modify_button_text": "Modify",
+  "add_category_popup_dialog_delete_button_text": "Delete",
+  "add_category_popup_dialog_warning_name_too_long": "Category name should not logger than 6 letters"
 }

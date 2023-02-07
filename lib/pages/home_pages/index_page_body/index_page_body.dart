@@ -49,7 +49,6 @@ class _IndexPageBodyState extends State<IndexPageBody> {
   }
 
   Widget buildListView() {
-    // var taskModels = GetIt.I<TaskModelsStore>().getTaskModelList;
     return Expanded(
       child: Observer(
         builder: (context) {

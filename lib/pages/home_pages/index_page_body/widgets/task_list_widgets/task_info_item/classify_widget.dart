@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uptodo/models/task_model/category_model.dart';
+import 'package:uptodo/models/category_model/category_model.dart';
 import 'package:uptodo/widgets/categary_icon_lib_widget.dart';
 
 class ClassifyWidget extends StatelessWidget {

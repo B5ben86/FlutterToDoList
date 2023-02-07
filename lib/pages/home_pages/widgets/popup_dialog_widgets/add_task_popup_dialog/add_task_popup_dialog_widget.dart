@@ -33,6 +33,7 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                   height: 14,
                 ),
                 buildPopupDialogInputTextFieldWidget(
+                  null,
                   'Please Input Task Name',
                   true,
                   (text) {
@@ -46,6 +47,7 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                   height: 14,
                 ),
                 buildPopupDialogInputTextFieldWidget(
+                  null,
                   'Please Input Task Description',
                   false,
                   (text) {

@@ -12,6 +12,12 @@ class CategoryModel {
 
   CategoryModel(this.name, this.colorNum, this.iconNum);
 
+  void copyFrom(CategoryModel model) {
+    name = model.name;
+    colorNum = model.colorNum;
+    iconNum = model.iconNum;
+  }
+
   factory CategoryModel.fromJson(Map<String, dynamic> json) =>
       _$CategoryModelFromJson(json);
 

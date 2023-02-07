@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:uptodo/widgets/categary_icon_lib_widget.dart';
 
 class IconSelectWidget extends StatefulWidget {
+  final int selectedIconIndexInitial;
   final int selectedIconColorIndex;
   final Function(int iconNum) onIconSelected;
-  const IconSelectWidget(this.selectedIconColorIndex, this.onIconSelected,
+  const IconSelectWidget(this.selectedIconIndexInitial,
+      this.selectedIconColorIndex, this.onIconSelected,
       {super.key});
 
   @override
@@ -12,8 +14,14 @@ class IconSelectWidget extends StatefulWidget {
 }
 
 class _IconSelectWidgetState extends State<IconSelectWidget> {
-  var selectedIconIndex = 0;
   var iconList = CategoryIconLibWidget().categoryIconsLib.values;
+  var selectedIconIndexNew = 0;
+
+  @override
+  void initState() {
+    selectedIconIndexNew = widget.selectedIconIndexInitial;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +33,8 @@ class _IconSelectWidgetState extends State<IconSelectWidget> {
             color: CategoryIconLibWidget()
                 .getIconColorViaColorIndex(widget.selectedIconColorIndex)[0],
             size: 38,
-            CategoryIconLibWidget().getIconDataViaIconIndex(selectedIconIndex),
+            CategoryIconLibWidget()
+                .getIconDataViaIconIndex(selectedIconIndexNew),
           ),
           _buildVerticalDivider(),
           Expanded(
@@ -55,7 +64,7 @@ class _IconSelectWidgetState extends State<IconSelectWidget> {
           onPressed: () {
             widget.onIconSelected(iconIndex);
             setState(() {
-              selectedIconIndex = iconIndex;
+              selectedIconIndexNew = iconIndex;
             });
           },
         ));

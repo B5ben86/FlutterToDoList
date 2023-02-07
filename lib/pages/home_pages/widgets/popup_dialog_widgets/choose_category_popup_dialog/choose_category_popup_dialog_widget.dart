@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:uptodo/generated/l10n.dart';
-import 'package:uptodo/models/model_handlers/category_models_handler.dart';
-import 'package:uptodo/models/task_model/category_model.dart';
-import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/add_category_popup_dialog/add_category_popup_dialog_widget.dart';
+import 'package:uptodo/models/category_model/category_model.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/add_or_modify_category_popup_dialog/add_or_modify_category_popup_dialog_widget.dart';
+import 'package:uptodo/stores/category_models_store.dart';
 import 'package:uptodo/utility/tools/navigation_service.dart';
 import 'package:uptodo/widgets/categary_icon_lib_widget.dart';
 
@@ -32,11 +34,9 @@ void showChooseCategoryPopupDialogWidget(BuildContext context,
                   _buildTitle(),
                   CategoryGridViewWidget((onSelectedCategory) => {}),
                   _buildAddButton(() => {
-                        showAddCategoryPopupDialogWidget(context,
-                            ((categoryModel) {
-                          debugPrint(
-                              'new category : ${categoryModel.toJson()}');
-                        }))
+                        //TODO: 调用 showAddOrModifyCategoryPopupDialog
+                        showAddOrModifyCategoryPopupDialogWidget(
+                            context, null, () => {}, () => {})
                       }),
                 ],
               ),
@@ -79,7 +79,7 @@ Widget _buildTitle() {
 
 Widget _buildAddButton(Function() onPressed) {
   return Padding(
-    padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+    padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: themeContext().primaryColor,
@@ -87,8 +87,8 @@ Widget _buildAddButton(Function() onPressed) {
         textStyle: const TextStyle(fontSize: 16),
       ),
       onPressed: onPressed,
-      child: const Text(
-        'Add Category', //TODO:
+      child: Text(
+        S.current.choose_category_popup_dialog_add_button_text,
       ),
     ),
   );
@@ -110,21 +110,28 @@ class _CategoryGridViewWidgetState extends State<CategoryGridViewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var modelList = CategoryModelsHandler().getModelList();
     return Expanded(
-      child: GridView.builder(
-        padding: const EdgeInsets.only(left: 12, right: 12),
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 90,
-            childAspectRatio: 64 / 90,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 30),
-        itemCount: modelList.length,
-        itemBuilder: ((context, index) {
-          return categoryItem(modelList[index], (() {
-            widget.onSelected(index);
-          }));
-        }),
+      child: Observer(
+        builder: (context) {
+          return GridView.builder(
+            padding: const EdgeInsets.only(left: 12, right: 12),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 90,
+                childAspectRatio: 64 / 90,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 30),
+            itemCount: GetIt.I<CategoryModelsStore>().modelMap.length,
+            itemBuilder: ((context, index) {
+              var model = GetIt.I<CategoryModelsStore>()
+                  .modelMap
+                  .values
+                  .toList()[index];
+              return categoryItem(model, (() {
+                widget.onSelected(index);
+              }));
+            }),
+          );
+        },
       ),
     );
   }
@@ -147,6 +154,10 @@ class _CategoryGridViewWidgetState extends State<CategoryGridViewWidget> {
             style: ElevatedButton.styleFrom(
                 foregroundColor: colors[1], backgroundColor: colors[0]),
             onPressed: onPressed,
+            onLongPress: () {
+              showAddOrModifyCategoryPopupDialogWidget(
+                  context, categoryModel, () => {}, () => {});
+            },
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,

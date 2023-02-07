@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:uptodo/utility/tools/navigation_service.dart';
 
 Widget buildPopupDialogInputTextFieldWidget(
+    String? contentText,
     String placeHolderText,
     bool autoFocus,
     Function(String text) onEditChanged,
     Function(String text) onSubmitted) {
   return SizedBox(
     height: 43,
-    child: TextField(
+    child: TextFormField(
+      initialValue: contentText,
       autofocus: autoFocus,
       style: const TextStyle(fontSize: 16),
       textAlignVertical: TextAlignVertical.center,
@@ -42,7 +44,7 @@ Widget buildPopupDialogInputTextFieldWidget(
       onChanged: (String text) {
         onEditChanged(text);
       },
-      onSubmitted: (String text) {
+      onFieldSubmitted: (String text) {
         onSubmitted(text);
       },
     ),

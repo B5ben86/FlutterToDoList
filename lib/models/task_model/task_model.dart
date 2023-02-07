@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:uptodo/models/task_model/category_model.dart';
+import 'package:uptodo/models/category_model/category_model.dart';
 import 'package:uuid/uuid.dart';
 
 part 'task_model.g.dart';

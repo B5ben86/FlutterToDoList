@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:uptodo/mock/category_model_mock_database.dart';
-import 'package:uptodo/models/task_model/category_model.dart';
+import 'package:uptodo/models/category_model/category_model.dart';
 
 class CategoryModelsHandler {
   static final CategoryModelsHandler _instant = CategoryModelsHandler._();

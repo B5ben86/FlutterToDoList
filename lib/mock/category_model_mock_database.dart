@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:uptodo/models/task_model/category_model.dart';
+import 'package:uptodo/models/category_model/category_model.dart';
 import 'package:uptodo/utility/storage/local_storage.dart';
 
 class CategoryModelMockDatabase {
