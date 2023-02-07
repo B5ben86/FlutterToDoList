@@ -4,9 +4,9 @@ import 'package:get_it/get_it.dart';
 import 'package:uptodo/generated/l10n.dart';
 import 'package:uptodo/models/category_model/category_model.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/add_or_modify_category_popup_dialog/add_or_modify_category_popup_dialog_widget.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/choose_category_popup_dialog/items/category_item_widget.dart';
 import 'package:uptodo/stores/category_models_store.dart';
 import 'package:uptodo/utility/tools/navigation_service.dart';
-import 'package:uptodo/widgets/categary_icon_lib_widget.dart';
 
 void showChooseCategoryPopupDialogWidget(BuildContext context,
     Function(CategoryModel categoryModel) categorySelected) {
@@ -34,7 +34,6 @@ void showChooseCategoryPopupDialogWidget(BuildContext context,
                   _buildTitle(),
                   CategoryGridViewWidget((onSelectedCategory) => {}),
                   _buildAddButton(() => {
-                        //TODO: 调用 showAddOrModifyCategoryPopupDialog
                         showAddOrModifyCategoryPopupDialogWidget(
                             context, null, () => {}, () => {})
                       }),
@@ -122,65 +121,17 @@ class _CategoryGridViewWidgetState extends State<CategoryGridViewWidget> {
                 crossAxisSpacing: 30),
             itemCount: GetIt.I<CategoryModelsStore>().modelMap.length,
             itemBuilder: ((context, index) {
-              var model = GetIt.I<CategoryModelsStore>()
+              var categoryModel = GetIt.I<CategoryModelsStore>()
                   .modelMap
                   .values
                   .toList()[index];
-              return categoryItem(model, (() {
+              return CategoryItemWidget(categoryModel, (() {
                 widget.onSelected(index);
               }));
             }),
           );
         },
       ),
-    );
-  }
-
-  Widget categoryItem(CategoryModel categoryModel, Function() onPressed) {
-    var colors = CategoryIconLibWidget()
-        .getIconColorViaColorIndex(categoryModel.colorNum);
-    var iconData =
-        CategoryIconLibWidget().getIconDataViaIconIndex(categoryModel.iconNum);
-    return Column(
-      children: [
-        Container(
-          height: 64,
-          width: 64,
-          decoration: BoxDecoration(
-            color: const Color(0xff272727),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                foregroundColor: colors[1], backgroundColor: colors[0]),
-            onPressed: onPressed,
-            onLongPress: () {
-              showAddOrModifyCategoryPopupDialogWidget(
-                  context, categoryModel, () => {}, () => {});
-            },
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  iconData,
-                  size: 32,
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Text(
-          categoryModel.name,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.normal,
-          ),
-        ),
-      ],
     );
   }
 }
