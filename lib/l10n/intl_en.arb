@@ -60,5 +60,8 @@
   "add_category_popup_dialog_confirm_button_text": "Create",
   "add_category_popup_dialog_modify_button_text": "Modify",
   "add_category_popup_dialog_delete_button_text": "Delete",
-  "add_category_popup_dialog_warning_name_too_long": "Category name should not logger than 6 letters"
+  "add_category_popup_dialog_warning_name_too_long": "Category name should not logger than 6 letters",
+
+  "add_task_popup_dialog_warning_task_name_empty": "Please input task name",
+  "add_task_popup_dialog_warning_task_description_empty": "Please input task description"
 }

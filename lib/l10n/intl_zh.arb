@@ -60,5 +60,8 @@
   "add_category_popup_dialog_confirm_button_text": "创建",
   "add_category_popup_dialog_modify_button_text": "修改",
   "add_category_popup_dialog_delete_button_text": "删除",
-  "add_category_popup_dialog_warning_name_too_long": "分类名称不能大于6个字, 请重新输入"
+  "add_category_popup_dialog_warning_name_too_long": "分类名称不能大于6个字, 请重新输入",
+
+  "add_task_popup_dialog_warning_task_name_empty":"请输入任务名称",
+  "add_task_popup_dialog_warning_task_description_empty":"请输入任务描述"
 }

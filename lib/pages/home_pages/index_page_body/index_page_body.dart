@@ -7,7 +7,6 @@ import 'package:uptodo/widgets/empty_divider_widget.dart';
 
 import 'widgets/no_tasks_widget.dart';
 import 'widgets/search_task_widget.dart';
-import 'widgets/task_list_widgets/task_info_item/task_info_item_widget.dart';
 
 class IndexPageBody extends StatefulWidget {
   const IndexPageBody({super.key});
@@ -48,24 +47,27 @@ class _IndexPageBodyState extends State<IndexPageBody> {
     );
   }
 
-  Widget buildListView() {
-    return Expanded(
-      child: Observer(
-        builder: (context) {
-          debugPrint(
-              'tasks amount : ${GetIt.I<TaskModelsStore>().taskModelMap.length}');
-          return ListView.builder(
-            itemBuilder: (context, index) {
-              var taskModel = GetIt.I<TaskModelsStore>()
-                  .taskModelMap
-                  .values
-                  .toList()[index];
-              return TaskInfoItemWidget(taskModel);
-            },
-            itemCount: GetIt.I<TaskModelsStore>().taskModelMap.length,
-          );
-        },
-      ),
-    );
-  }
+  // Widget buildListView() {
+  //   return Expanded(
+  //     child: Observer(
+  //       builder: (context) {
+  //         debugPrint(
+  //             'tasks amount : ${GetIt.I<TaskModelsStore>().taskModelMap.length}');
+  //         return ListView.builder(
+  //           itemBuilder: (context, index) {
+  //             var taskModel = GetIt.I<TaskModelsStore>()
+  //                 .taskModelMap
+  //                 .values
+  //                 .toList()[index];
+  //             return TaskInfoItemWidget(taskModel, (taskModel) {
+  //               debugPrint(
+  //                   'TaskInfoItemWidget on click : ${taskModel.toJson()}');
+  //             });
+  //           },
+  //           itemCount: GetIt.I<TaskModelsStore>().taskModelMap.length,
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 }

@@ -32,7 +32,10 @@ void showChooseCategoryPopupDialogWidget(BuildContext context,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   _buildTitle(),
-                  CategoryGridViewWidget((onSelectedCategory) => {}),
+                  CategoryGridViewWidget((onSelectedCategory) => {
+                        categorySelected(onSelectedCategory),
+                        Navigator.pop(context),
+                      }),
                   _buildAddButton(() => {
                         showAddOrModifyCategoryPopupDialogWidget(
                             context, null, () => {}, () => {})
@@ -94,7 +97,7 @@ Widget _buildAddButton(Function() onPressed) {
 }
 
 class CategoryGridViewWidget extends StatefulWidget {
-  final Function(int) onSelected;
+  final Function(CategoryModel) onSelected;
   const CategoryGridViewWidget(this.onSelected, {super.key});
 
   @override
@@ -126,7 +129,7 @@ class _CategoryGridViewWidgetState extends State<CategoryGridViewWidget> {
                   .values
                   .toList()[index];
               return CategoryItemWidget(categoryModel, (() {
-                widget.onSelected(index);
+                widget.onSelected(categoryModel);
               }));
             }),
           );

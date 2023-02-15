@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:uptodo/generated/l10n.dart';
+import 'package:uptodo/models/category_model/category_model.dart';
+import 'package:uptodo/models/task_model/task_model.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/add_task_popup_dialog/items/build_task_detail_setting_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/add_task_popup_dialog/items/build_title_text_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/calendar_popup_dialog/calendar_popup_dialog_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/choose_category_popup_dialog/choose_category_popup_dialog_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/choose_task_priority_popup_dialog/choose_task_priority_popup_dialog_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/popup_common_widgets/build_popup_dialog_input_text_field_widget.dart';
+import 'package:uptodo/pages/home_pages/widgets/toast_widgets/notice_popup_toast/notice_toast.dart';
+import 'package:uptodo/stores/task_models_store.dart';
 
 void showAddTaskPopupDialogWidget(BuildContext context) {
   showDialog(
     context: context,
     builder: (context) {
+      var taskModelNew =
+          TaskModel('', '', DateTime.now(), 0, CategoryModel('', 0, 0), false);
       return Dialog(
         elevation: 0,
         insetPadding: const EdgeInsets.only(left: 8, right: 8),
@@ -38,6 +46,7 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                   true,
                   (text) {
                     debugPrint('onEditChanged : $text');
+                    taskModelNew.taskName = text;
                   },
                   (text) {
                     debugPrint('onSubmitted : $text');
@@ -52,6 +61,7 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                   false,
                   (text) {
                     debugPrint('onEditChanged : $text');
+                    taskModelNew.taskDescription = text;
                   },
                   (text) {
                     debugPrint('onSubmitted : $text');
@@ -64,21 +74,38 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                   switch (itemType) {
                     case ETaskSettingItemType.clock:
                       showCalendarPopupDialogWidget(context, ((selectedDay) {
+                        taskModelNew.dateTime = selectedDay;
                         debugPrint('selected day : ${selectedDay.toLocal()}');
                       }));
                       break;
                     case ETaskSettingItemType.tag:
-                      showChooseCategoryPopupDialogWidget(
-                          context, ((categoryModel) {}));
+                      showChooseCategoryPopupDialogWidget(context,
+                          ((categoryModel) {
+                        taskModelNew.categoryModel = categoryModel;
+                        debugPrint(
+                            'selected category model : ${categoryModel.toJson()}');
+                      }));
                       break;
                     case ETaskSettingItemType.priority:
                       showChooseTaskPriorityPopupDialogWidget(context, 0,
                           ((taskPriorityNew) {
+                        taskModelNew.priority = taskPriorityNew;
                         debugPrint('taskPriorityNew = $taskPriorityNew');
                       }));
                       break;
                     case ETaskSettingItemType.confirm:
-                      // TODO: Handle this case.
+                      if (taskModelNew.taskName.isEmpty) {
+                        noticeToast(S.current
+                            .add_task_popup_dialog_warning_task_name_empty);
+                      } else if (taskModelNew.taskDescription.isEmpty) {
+                        noticeToast(S.current
+                            .add_task_popup_dialog_warning_task_description_empty);
+                      } else {
+                        GetIt.I<TaskModelsStore>()
+                            .insertTaskModel(taskModelNew);
+                        Navigator.pop(context);
+                      }
+
                       break;
                   }
 

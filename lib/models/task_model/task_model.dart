@@ -24,16 +24,18 @@ const MaxPriority = 10;
 class TaskModel {
   String id = const Uuid().v1();
   String taskName;
+  String taskDescription;
   DateTime dateTime;
   int priority;
   CategoryModel categoryModel;
   bool? finished = false;
 
-  TaskModel(this.taskName, this.dateTime, this.priority, this.categoryModel,
-      this.finished);
+  TaskModel(this.taskName, this.taskDescription, this.dateTime, this.priority,
+      this.categoryModel, this.finished);
 
   void copyFrom(TaskModel taskModel) {
     taskName = taskModel.taskName;
+    taskDescription = taskModel.taskDescription;
     dateTime = taskModel.dateTime;
     priority = taskModel.priority;
     categoryModel = taskModel.categoryModel;
