@@ -46,4 +46,13 @@ class TaskModel {
       _$TaskModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TaskModelToJson(this);
+
+  //TODO: 完善日期显示格式
+  String dateTimeFormatter() {
+    var dateTimeString = '';
+    dateTimeString += '${dateTime.month}/${dateTime.day}';
+    dateTimeString += ' ${dateTime.hour}:${dateTime.minute}';
+
+    return dateTimeString;
+  }
 }

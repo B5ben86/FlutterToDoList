@@ -63,5 +63,14 @@
   "add_category_popup_dialog_warning_name_too_long": "Category name should not logger than 6 letters",
 
   "add_task_popup_dialog_warning_task_name_empty": "Please input task name",
-  "add_task_popup_dialog_warning_task_description_empty": "Please input task description"
+  "add_task_popup_dialog_warning_task_description_empty": "Please input task description",
+
+  "edit_task_title_popup_dialog_title_text": "Edit Task Title",
+  "edit_task_title_popup_dialog_edit_button_text": "Edit",
+
+  "edit_task_page_item_title_task_time": "Task Time",
+  "edit_task_page_item_title_task_category": "Task Category",
+  "edit_task_page_item_title_task_priority": "Task Priority",
+  "edit_task_page_item_title_sub_task": "Sub Task",
+  "edit_task_page_item_title_delete_task": "Delete Task"
 }

@@ -117,20 +117,11 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
     );
   }
 
-  //TODO: 完善日期显示格式
-  String dateTimeFormatter(DateTime dateTime) {
-    var dateTimeString = '';
-    dateTimeString += '${dateTime.month}/${dateTime.day}';
-    dateTimeString += ' ${dateTime.hour}:${dateTime.minute}';
-
-    return dateTimeString;
-  }
-
   Widget buildTaskTime() {
     return Padding(
       padding: const EdgeInsets.only(top: 6),
       child: Text(
-        dateTimeFormatter(widget.taskModel.dateTime),
+        widget.taskModel.dateTimeFormatter(),
         style: const TextStyle(color: Color(0xffafafaf), fontSize: 14),
       ),
     );
