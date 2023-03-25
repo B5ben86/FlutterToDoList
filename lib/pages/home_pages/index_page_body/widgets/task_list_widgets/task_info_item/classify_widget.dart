@@ -17,26 +17,27 @@ class ClassifyWidget extends StatelessWidget {
           backgroundColor: CategoryIconLibWidget()
               .getIconColorViaColorIndex(categoryModel.colorNum)[0],
         ),
-        child: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Icon(
-                CategoryIconLibWidget()
-                    .getIconDataViaIconIndex(categoryModel.iconNum),
-                color: CategoryIconLibWidget()
-                    .getIconColorViaColorIndex(categoryModel.colorNum)[1],
-                size: 14,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 5.0),
-                child: Text(
-                  '178',
-                  style: TextStyle(color: Colors.white, fontSize: 12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Icon(
+              CategoryIconLibWidget()
+                  .getIconDataViaIconIndex(categoryModel.iconNum),
+              color: CategoryIconLibWidget()
+                  .getIconColorViaColorIndex(categoryModel.colorNum)[1],
+              size: 14,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0),
+              child: Text(
+                categoryModel.name,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         onPressed: () {},
       ),

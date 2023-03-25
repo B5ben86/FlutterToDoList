@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'package:uptodo/generated/l10n.dart';
 import 'package:uptodo/models/model_handlers/user_models_handler.dart';
 import 'package:uptodo/pages/home_pages/home_page.dart';
 import 'package:uptodo/pages/login_register_pages/login_page.dart';
 import 'package:uptodo/pages/login_register_pages/register_page.dart';
 import 'package:uptodo/pages/welcome_pages/intro_page_display_handle.dart';
+import 'package:uptodo/providers/task_models_provider.dart';
 import 'package:uptodo/stores/category_models_store.dart';
-import 'package:uptodo/stores/task_models_store.dart';
 import 'package:uptodo/utility/tools/NavigateHandler.dart';
 
 class IntroLastPage extends StatefulWidget {
@@ -91,7 +92,8 @@ class _IntroLastPageState extends State<IntroLastPage> {
     var loginUserModel = await UserModelsHandler().loadLoginUserMode();
 
     if (loginUserModel != null) {
-      GetIt.I<TaskModelsStore>().loadFromDatabase();
+      // GetIt.I<TaskModelsStore>().loadFromDatabase();
+      context.read<TaskModelMapChangeNotifier>().loadFromDatabase();
       GetIt.I<CategoryModelsStore>().loadFromDatabase();
       await Future.delayed(const Duration(seconds: 1));
       //若已登录，则跳转到 HomePage

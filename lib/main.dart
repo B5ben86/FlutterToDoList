@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:uptodo/generated/l10n.dart';
 import 'package:uptodo/pages/welcome_pages/welcome_page.dart';
+import 'package:uptodo/providers/task_models_provider.dart';
 import 'package:uptodo/utility/get_it_initial/GetItInitial.dart';
 import 'package:uptodo/utility/tools/navigation_service.dart';
 
 void main() {
   setupGetIt();
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TaskModelMapChangeNotifier()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

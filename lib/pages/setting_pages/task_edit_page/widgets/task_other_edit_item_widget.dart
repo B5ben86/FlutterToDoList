@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uptodo/generated/l10n.dart';
 import 'package:uptodo/models/task_model/task_model.dart';
+import 'package:uptodo/widgets/categary_icon_lib_widget.dart';
 
 enum ETaskEditItemType {
   time,
@@ -56,6 +57,12 @@ class _TaskTimeEditItemWidgetState extends State<TaskOtherEditItemWidget> {
 
   @override
   Widget build(BuildContext context) {
+    Color itemColor = Colors.white;
+
+    if (widget.itemType == ETaskEditItemType.delete) {
+      itemColor = Colors.redAccent;
+    }
+
     return Padding(
       padding: const EdgeInsets.only(left: 32, right: 24),
       child: Row(
@@ -68,11 +75,15 @@ class _TaskTimeEditItemWidgetState extends State<TaskOtherEditItemWidget> {
               Icon(
                 icon,
                 size: 24,
+                color: itemColor,
               ),
               const SizedBox(width: 8),
               Text(
                 itemTitle,
-                style: const TextStyle(fontSize: 16),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: itemColor,
+                ),
               ),
             ],
           ),
@@ -84,14 +95,17 @@ class _TaskTimeEditItemWidgetState extends State<TaskOtherEditItemWidget> {
 
   Widget rightButtonWidget() {
     late Widget rightButtonWidget;
+    final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
+      backgroundColor: const Color(0x15ffffff),
+      shadowColor: Colors.transparent,
+      fixedSize: const Size.fromHeight(45),
+      padding: const EdgeInsets.only(left: 16, right: 16),
+    );
 
     switch (widget.itemType) {
       case ETaskEditItemType.time:
         rightButtonWidget = ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            fixedSize: const Size.fromHeight(45),
-            padding: const EdgeInsets.only(left: 16, right: 16),
-          ),
+          style: buttonStyle,
           onPressed: () {
             widget.buttonOnPressed(widget.itemType);
           },
@@ -100,22 +114,29 @@ class _TaskTimeEditItemWidgetState extends State<TaskOtherEditItemWidget> {
         break;
       case ETaskEditItemType.category:
         rightButtonWidget = ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            fixedSize: const Size.fromHeight(45),
-            padding: const EdgeInsets.only(left: 16, right: 16),
-          ),
+          style: buttonStyle,
           onPressed: () {
             widget.buttonOnPressed(widget.itemType);
           },
-          child: Text(widget.taskModel.dateTimeFormatter()),
+          child: Row(
+            children: [
+              Icon(
+                CategoryIconLibWidget().getIconDataViaIconIndex(
+                    widget.taskModel.categoryModel.iconNum),
+                color: CategoryIconLibWidget().getIconColorViaColorIndex(
+                    widget.taskModel.categoryModel.colorNum)[0],
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(widget.taskModel.categoryModel.name),
+            ],
+          ),
         );
         break;
       case ETaskEditItemType.priority:
         rightButtonWidget = ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            fixedSize: const Size.fromHeight(45),
-            padding: const EdgeInsets.only(left: 16, right: 16),
-          ),
+          style: buttonStyle,
           onPressed: () {
             widget.buttonOnPressed(widget.itemType);
           },
@@ -124,10 +145,7 @@ class _TaskTimeEditItemWidgetState extends State<TaskOtherEditItemWidget> {
         break;
       case ETaskEditItemType.subTask:
         rightButtonWidget = ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            fixedSize: const Size.fromHeight(45),
-            padding: const EdgeInsets.only(left: 16, right: 16),
-          ),
+          style: buttonStyle,
           onPressed: () {
             widget.buttonOnPressed(widget.itemType);
           },

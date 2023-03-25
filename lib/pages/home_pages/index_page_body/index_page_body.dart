@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'package:uptodo/pages/home_pages/index_page_body/widgets/task_list_widgets/task_list_widget.dart';
-import 'package:uptodo/stores/task_models_store.dart';
+import 'package:uptodo/providers/task_models_provider.dart';
 import 'package:uptodo/widgets/empty_divider_widget.dart';
 
 import 'widgets/no_tasks_widget.dart';
@@ -18,9 +18,12 @@ class IndexPageBody extends StatefulWidget {
 class _IndexPageBodyState extends State<IndexPageBody> {
   @override
   Widget build(BuildContext context) {
+    final taskModelMapChangeNotifier =
+        context.read<TaskModelMapChangeNotifier>();
     return Observer(
       builder: (observerContext) {
-        if (GetIt.I<TaskModelsStore>().isEmpty) {
+        // if (GetIt.I<TaskModelsStore>().isEmpty) {
+        if (taskModelMapChangeNotifier.taskModelMap.isEmpty) {
           return const NoTasksWidget();
         } else {
           return buildBodyContent();

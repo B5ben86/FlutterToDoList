@@ -1,5 +1,6 @@
 {
   "common_cancel": "Cancel",
+  "common_delete": "Delete",
 
   "intro_page_skip": "SKIP",
   "intro_page_next": "NEXT",
@@ -72,5 +73,8 @@
   "edit_task_page_item_title_task_category": "Task Category",
   "edit_task_page_item_title_task_priority": "Task Priority",
   "edit_task_page_item_title_sub_task": "Sub Task",
-  "edit_task_page_item_title_delete_task": "Delete Task"
+  "edit_task_page_item_title_delete_task": "Delete Task",
+  "edit_task_page_confirm_edit_button_text": "Edit Task",
+  "edit_task_delete_task_popup_dialog_title_text": "Task Title",
+  "edit_task_delete_task_popup_dialog_warning_text": "Are you sure to delete this task?"
 }

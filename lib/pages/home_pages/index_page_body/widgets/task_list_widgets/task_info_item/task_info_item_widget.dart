@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'package:uptodo/models/task_model/task_model.dart';
 import 'package:uptodo/pages/home_pages/index_page_body/widgets/task_list_widgets/task_info_item/classify_widget.dart';
-import 'package:uptodo/stores/task_models_store.dart';
+import 'package:uptodo/providers/task_models_provider.dart';
 import 'package:uptodo/widgets/round_check_box_widget.dart';
 
 import 'priority_widget.dart';
@@ -68,7 +68,10 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
           checkedStatus = checkedStatusNew;
         });
         widget.taskModel.finished = checkedStatusNew;
-        GetIt.I<TaskModelsStore>().updateTaskModel(widget.taskModel);
+        // GetIt.I<TaskModelsStore>().updateTaskModel(widget.taskModel);
+        context
+            .read<TaskModelMapChangeNotifier>()
+            .updateTaskModel(widget.taskModel);
       },
     );
   }

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:uptodo/generated/l10n.dart';
 import 'package:uptodo/models/category_model/category_model.dart';
 import 'package:uptodo/models/task_model/task_model.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/calendar_popup_dialog/calendar_popup_dialog_widget.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/choose_category_popup_dialog/choose_category_popup_dialog_widget.dart';
+import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/choose_task_priority_popup_dialog/choose_task_priority_popup_dialog_widget.dart';
+import 'package:uptodo/pages/setting_pages/task_edit_page/popup_dialog_widgets/delete_task_popup_dialog_widget.dart';
 import 'package:uptodo/pages/setting_pages/task_edit_page/widgets/task_edit_page_app_bar_widget.dart';
 import 'package:uptodo/pages/setting_pages/task_edit_page/widgets/task_other_edit_item_widget.dart';
 import 'package:uptodo/pages/setting_pages/task_edit_page/widgets/task_title_edit_item_widget.dart';
+import 'package:uptodo/providers/task_models_provider.dart';
 
 class TaskEditPage extends StatefulWidget {
   final TaskModel taskModel;
@@ -58,6 +64,8 @@ class _TaskEditPageState extends State<TaskEditPage> {
           _buildTaskSubTaskEditItem(),
           const SizedBox(height: 34),
           _buildTaskDeleteEditItem(),
+          const Spacer(),
+          _buildEditTaskButton(),
         ],
       ),
     );
@@ -106,7 +114,13 @@ class _TaskEditPageState extends State<TaskEditPage> {
     return TaskOtherEditItemWidget(
       taskModelNew,
       ETaskEditItemType.category,
-      (itemType) => {},
+      (itemType) => {
+        showChooseCategoryPopupDialogWidget(context, (categoryModelNew) {
+          setState(() {
+            taskModelNew.categoryModel = categoryModelNew;
+          });
+        })
+      },
     );
   }
 
@@ -114,7 +128,17 @@ class _TaskEditPageState extends State<TaskEditPage> {
     return TaskOtherEditItemWidget(
       taskModelNew,
       ETaskEditItemType.priority,
-      (itemType) => {},
+      (itemType) => {
+        showChooseTaskPriorityPopupDialogWidget(
+          context,
+          taskModelNew.priority,
+          (priorityNew) {
+            setState(() {
+              taskModelNew.priority = priorityNew;
+            });
+          },
+        )
+      },
     );
   }
 
@@ -127,10 +151,51 @@ class _TaskEditPageState extends State<TaskEditPage> {
   }
 
   Widget _buildTaskDeleteEditItem() {
-    return TaskOtherEditItemWidget(
-      taskModelNew,
-      ETaskEditItemType.delete,
-      (itemType) => {},
+    return GestureDetector(
+      onTap: () {
+        showDeleteTaskPopupDialogWidget(
+          context,
+          taskModelNew.taskName,
+          () => {
+            // GetIt.I<TaskModelsStore>().deleteTaskModel(widget.taskModel.id),
+            context
+                .read<TaskModelMapChangeNotifier>()
+                .deleteTaskModel(widget.taskModel.id),
+            Navigator.pop(context),
+          },
+        );
+      },
+      child: TaskOtherEditItemWidget(
+        taskModelNew,
+        ETaskEditItemType.delete,
+        (itemType) => {},
+      ),
+    );
+  }
+
+  Widget _buildEditTaskButton() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 24, right: 24, bottom: 40),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Theme.of(context).primaryColor,
+          minimumSize: const Size(double.infinity, 48),
+        ),
+        onPressed: () {
+          widget.taskModel.copyFrom(taskModelNew);
+          // GetIt.I<TaskModelsStore>().updateTaskModel(widget.taskModel);
+          context
+              .read<TaskModelMapChangeNotifier>()
+              .updateTaskModel(widget.taskModel);
+          Navigator.pop(context);
+        },
+        child: Text(
+          S.current.edit_task_page_confirm_edit_button_text,
+          style: const TextStyle(
+            fontSize: 16,
+          ),
+        ),
+      ),
     );
   }
 }

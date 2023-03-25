@@ -1,5 +1,6 @@
 {
   "common_cancel": "取消",
+  "common_delete": "删除",
 
   "intro_page_skip": "跳过",
   "intro_page_next": "下一步",
@@ -72,5 +73,8 @@
   "edit_task_page_item_title_task_category": "分类",
   "edit_task_page_item_title_task_priority": "优先级",
   "edit_task_page_item_title_sub_task": "子任务",
-  "edit_task_page_item_title_delete_task": "删除任务"
+  "edit_task_page_item_title_delete_task": "删除任务",
+  "edit_task_page_confirm_edit_button_text": "确认修改",
+  "edit_task_delete_task_popup_dialog_title_text": "任务名称",
+  "edit_task_delete_task_popup_dialog_warning_text": "确定删除任务吗?"
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'package:uptodo/generated/l10n.dart';
 import 'package:uptodo/models/category_model/category_model.dart';
 import 'package:uptodo/models/task_model/task_model.dart';
@@ -10,7 +10,7 @@ import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/choose_cate
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/choose_task_priority_popup_dialog/choose_task_priority_popup_dialog_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/popup_common_widgets/build_popup_dialog_input_text_field_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/toast_widgets/notice_popup_toast/notice_toast.dart';
-import 'package:uptodo/stores/task_models_store.dart';
+import 'package:uptodo/providers/task_models_provider.dart';
 
 void showAddTaskPopupDialogWidget(BuildContext context) {
   showDialog(
@@ -101,7 +101,9 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                         noticeToast(S.current
                             .add_task_popup_dialog_warning_task_description_empty);
                       } else {
-                        GetIt.I<TaskModelsStore>()
+                        // GetIt.I<TaskModelsStore>().insertTaskModel(taskModelNew);
+                        context
+                            .read<TaskModelMapChangeNotifier>()
                             .insertTaskModel(taskModelNew);
                         Navigator.pop(context);
                       }
