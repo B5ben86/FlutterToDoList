@@ -8,9 +8,9 @@ import 'package:uptodo/pages/home_pages/home_page.dart';
 import 'package:uptodo/pages/login_register_pages/login_page.dart';
 import 'package:uptodo/pages/login_register_pages/register_page.dart';
 import 'package:uptodo/pages/welcome_pages/intro_page_display_handle.dart';
-import 'package:uptodo/providers/task_models_provider.dart';
+import 'package:uptodo/providers/task_model_map_change_notifier.dart';
 import 'package:uptodo/stores/category_models_store.dart';
-import 'package:uptodo/utility/tools/NavigateHandler.dart';
+import 'package:uptodo/utility/tools/navigate_handler.dart';
 
 class IntroLastPage extends StatefulWidget {
   const IntroLastPage({super.key});

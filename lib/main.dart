@@ -4,8 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:uptodo/generated/l10n.dart';
 import 'package:uptodo/pages/welcome_pages/welcome_page.dart';
-import 'package:uptodo/providers/task_models_provider.dart';
-import 'package:uptodo/utility/get_it_initial/GetItInitial.dart';
+import 'package:uptodo/providers/task_model_map_change_notifier.dart';
+import 'package:uptodo/utility/get_it_initial/get_it_initial.dart';
 import 'package:uptodo/utility/tools/navigation_service.dart';
 
 void main() {

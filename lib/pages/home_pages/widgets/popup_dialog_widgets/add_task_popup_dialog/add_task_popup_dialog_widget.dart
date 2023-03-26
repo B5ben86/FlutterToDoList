@@ -10,7 +10,7 @@ import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/choose_cate
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/choose_task_priority_popup_dialog/choose_task_priority_popup_dialog_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/popup_common_widgets/build_popup_dialog_input_text_field_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/toast_widgets/notice_popup_toast/notice_toast.dart';
-import 'package:uptodo/providers/task_models_provider.dart';
+import 'package:uptodo/providers/task_model_map_change_notifier.dart';
 
 void showAddTaskPopupDialogWidget(BuildContext context) {
   showDialog(

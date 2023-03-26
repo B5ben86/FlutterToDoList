@@ -5,7 +5,7 @@ import 'package:uptodo/pages/intro_pages/intro_step_two_page.dart';
 import 'package:uptodo/pages/intro_pages/widgets/intro_step_page_app_bar_widget.dart';
 import 'package:uptodo/pages/intro_pages/widgets/intro_step_page_bottom_bar_widget.dart';
 import 'package:uptodo/pages/intro_pages/widgets/intro_step_page_image_widget.dart';
-import 'package:uptodo/utility/tools/NavigateHandler.dart';
+import 'package:uptodo/utility/tools/navigate_handler.dart';
 
 class IntroStepOnePage extends StatefulWidget {
   const IntroStepOnePage({super.key});

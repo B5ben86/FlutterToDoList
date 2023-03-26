@@ -5,7 +5,7 @@ import 'package:uptodo/pages/intro_pages/intro_last_page.dart';
 import 'package:uptodo/pages/intro_pages/intro_step_one_page.dart';
 import 'package:uptodo/pages/welcome_pages/intro_page_display_handle.dart';
 import 'package:uptodo/utility/svg_images/svg_images_getter.dart';
-import 'package:uptodo/utility/tools/NavigateHandler.dart';
+import 'package:uptodo/utility/tools/navigate_handler.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});

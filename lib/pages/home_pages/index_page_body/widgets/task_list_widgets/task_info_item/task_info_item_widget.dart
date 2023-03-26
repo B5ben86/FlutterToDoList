@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uptodo/models/task_model/task_model.dart';
 import 'package:uptodo/pages/home_pages/index_page_body/widgets/task_list_widgets/task_info_item/classify_widget.dart';
-import 'package:uptodo/providers/task_models_provider.dart';
+import 'package:uptodo/providers/task_model_map_change_notifier.dart';
 import 'package:uptodo/widgets/round_check_box_widget.dart';
 
 import 'priority_widget.dart';
@@ -17,11 +17,11 @@ class TaskInfoItemWidget extends StatefulWidget {
 }
 
 class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
-  var checkedStatus = false;
+  // var checkedStatus = false;
 
   @override
   void initState() {
-    checkedStatus = widget.taskModel.finished ?? false;
+    // checkedStatus = widget.taskModel.finished ?? false;
     super.initState();
   }
 
@@ -61,12 +61,12 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
 
   Widget buildCheckBox() {
     return RoundCheckBoxWidget(
-      checkedStatus,
+      widget.taskModel.finished ?? false,
       (checkedStatusNew) {
         debugPrint('checkedStatusNew : $checkedStatusNew');
-        setState(() {
-          checkedStatus = checkedStatusNew;
-        });
+        // setState(() {
+        //   checkedStatus = checkedStatusNew;
+        // });
         widget.taskModel.finished = checkedStatusNew;
         // GetIt.I<TaskModelsStore>().updateTaskModel(widget.taskModel);
         context

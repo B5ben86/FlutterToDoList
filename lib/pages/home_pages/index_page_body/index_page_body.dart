@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:uptodo/pages/home_pages/index_page_body/widgets/task_list_widgets/task_list_widget.dart';
-import 'package:uptodo/providers/task_models_provider.dart';
+import 'package:uptodo/providers/task_model_map_change_notifier.dart';
 import 'package:uptodo/widgets/empty_divider_widget.dart';
 
 import 'widgets/no_tasks_widget.dart';

@@ -10,7 +10,7 @@ import 'package:uptodo/pages/login_register_pages/widgets/login_register_page_di
 import 'package:uptodo/pages/login_register_pages/widgets/login_register_tips_widget.dart';
 import 'package:uptodo/pages/login_register_pages/widgets/third_way_login_register_button_widget.dart';
 import 'package:uptodo/pages/login_register_pages/widgets/title_widget.dart';
-import 'package:uptodo/utility/tools/NavigateHandler.dart';
+import 'package:uptodo/utility/tools/navigate_handler.dart';
 import 'package:uptodo/widgets/empty_divider_widget.dart';
 
 import '../home_pages/home_page.dart';

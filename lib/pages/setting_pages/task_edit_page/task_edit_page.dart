@@ -10,7 +10,7 @@ import 'package:uptodo/pages/setting_pages/task_edit_page/popup_dialog_widgets/d
 import 'package:uptodo/pages/setting_pages/task_edit_page/widgets/task_edit_page_app_bar_widget.dart';
 import 'package:uptodo/pages/setting_pages/task_edit_page/widgets/task_other_edit_item_widget.dart';
 import 'package:uptodo/pages/setting_pages/task_edit_page/widgets/task_title_edit_item_widget.dart';
-import 'package:uptodo/providers/task_models_provider.dart';
+import 'package:uptodo/providers/task_model_map_change_notifier.dart';
 
 class TaskEditPage extends StatefulWidget {
   final TaskModel taskModel;
