@@ -17,38 +17,37 @@ class TaskListWidget extends StatelessWidget {
         builder: (context) {
           return ListView.builder(
             itemBuilder: (context, index) {
-              if (index == 0) {
-                //TODO: 如何更优雅处理 headerSection
-                return const TaskClassifyHeaderSectionWidget(
-                    EHeaderSectionType.today);
-              } else {
-                //TODO: 如何实现只更新局部？
-                // var taskModel = context.select(
-                //     (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
-                //         taskModelMapChangeNotifier.taskModelList[index]);
-                var taskModel = context
-                    .watch<TaskModelMapChangeNotifier>()
-                    .taskModelMap
-                    .values
-                    .toList()[index - 1];
-                debugPrint('update index : $index');
-                // var taskModel = GetIt.I<TaskModelsStore>()
-                //     .taskModelMap
-                //     .values
-                //     .toList()[index];
-                return TaskInfoItemWidget(taskModel, (taskModel) {
-                  NavigateHandler().push(context, TaskEditPage(taskModel));
-                });
-              }
+              return _buildListItem(context, index);
             },
             // itemCount: GetIt.I<TaskModelsStore>().taskModelMap.length,
-            itemCount: context.watch<TaskModelMapChangeNotifier>().length + 1,
-            // itemCount: context.select(
-            //     (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
-            //         taskModelMapChangeNotifier.length),
+            // itemCount: context.select<TaskModelMapChangeNotifier, int>(
+            //     (taskModelMapChangeNotifier) =>
+            //         taskModelMapChangeNotifier.taskModelMap.length + 1),
+            // itemCount: 5,
+            itemCount: context.select(
+                (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
+                    taskModelMapChangeNotifier.length + 1),
           );
         },
       ),
     );
+  }
+
+  Widget _buildListItem(BuildContext context, int index) {
+    debugPrint('list item build : $index');
+    if (index == 0) {
+      //TODO: 如何更优雅处理 headerSection
+      return const TaskClassifyHeaderSectionWidget(EHeaderSectionType.today);
+    } else {
+      return Builder(builder: (context) {
+        var taskModelList =
+            context.read<TaskModelMapChangeNotifier>().taskModelList;
+        var taskModel = taskModelList[index - 1]!;
+        // debugPrint('update index : $index');
+        return TaskInfoItemWidget(taskModel, (taskModel) {
+          NavigateHandler().push(context, TaskEditPage(taskModel));
+        });
+      });
+    }
   }
 }

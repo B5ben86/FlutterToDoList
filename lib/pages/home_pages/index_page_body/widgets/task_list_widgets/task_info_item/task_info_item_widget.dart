@@ -60,13 +60,17 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
   }
 
   Widget buildCheckBox() {
+    debugPrint('build checkbox: ${widget.taskModel.id}');
+    var finishedRaw = context.select(
+            (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
+                taskModelMapChangeNotifier
+                    .taskModelMap[widget.taskModel.id]?.finished) ??
+        false;
     return RoundCheckBoxWidget(
-      widget.taskModel.finished ?? false,
+      finishedRaw,
       (checkedStatusNew) {
-        debugPrint('checkedStatusNew : $checkedStatusNew');
-        // setState(() {
-        //   checkedStatus = checkedStatusNew;
-        // });
+        // debugPrint(
+        //     'checkedStatusNew update : ${widget.taskModel.id} $checkedStatusNew');
         widget.taskModel.finished = checkedStatusNew;
         // GetIt.I<TaskModelsStore>().updateTaskModel(widget.taskModel);
         context
@@ -105,15 +109,28 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
   }
 
   Widget buildClassifyAndPriorityWidget() {
+    debugPrint('build classify and priority widget: ${widget.taskModel.id}');
+
+    var categoryModel = context.select(
+      (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
+          taskModelMapChangeNotifier
+              .taskModelMap[widget.taskModel.id]!.categoryModel,
+    );
+    var priority = context.select(
+      (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
+          taskModelMapChangeNotifier
+              .taskModelMap[widget.taskModel.id]!.priority,
+    );
+
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        ClassifyWidget(widget.taskModel.categoryModel),
+        ClassifyWidget(categoryModel),
         const SizedBox(
           width: 12,
         ),
-        PriorityWidget(widget.taskModel.priority, () {
+        PriorityWidget(priority, () {
           debugPrint('Priority Widget Pressed');
         }),
       ],
@@ -121,6 +138,11 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
   }
 
   Widget buildTaskTime() {
+    debugPrint('build taskTime: ${widget.taskModel.id}');
+    var dateTime = context.select(
+        (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
+            taskModelMapChangeNotifier
+                .taskModelMap[widget.taskModel.id]?.dateTime);
     return Padding(
       padding: const EdgeInsets.only(top: 6),
       child: Text(
@@ -131,8 +153,15 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
   }
 
   Widget buildTaskName() {
+    debugPrint('build taskName: ${widget.taskModel.id}');
+    var taskName = context.select(
+      (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
+          taskModelMapChangeNotifier
+              .taskModelMap[widget.taskModel.id]?.taskName ??
+          "",
+    );
     return Text(
-      widget.taskModel.taskName,
+      taskName,
       style: const TextStyle(color: Colors.white, fontSize: 16),
     );
   }
