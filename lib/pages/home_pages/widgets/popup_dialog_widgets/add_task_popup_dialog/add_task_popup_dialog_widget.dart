@@ -18,6 +18,10 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
     builder: (context) {
       var taskModelNew =
           TaskModel('', '', DateTime.now(), 0, CategoryModel('', 0, 0), false);
+
+      var taskNameEditingController = TextEditingController();
+      var taskDescriptionEditingController = TextEditingController();
+
       return Dialog(
         elevation: 0,
         insetPadding: const EdgeInsets.only(left: 8, right: 8),
@@ -41,31 +45,18 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                   height: 14,
                 ),
                 buildPopupDialogInputTextFieldWidget(
-                  null,
-                  'Please Input Task Name',
+                  S.current.add_task_popup_dialog_warning_task_name_empty,
                   true,
-                  (text) {
-                    debugPrint('onEditChanged : $text');
-                    taskModelNew.taskName = text;
-                  },
-                  (text) {
-                    debugPrint('onSubmitted : $text');
-                  },
+                  taskNameEditingController,
                 ),
                 const SizedBox(
                   height: 14,
                 ),
                 buildPopupDialogInputTextFieldWidget(
-                  null,
-                  'Please Input Task Description',
+                  S.current
+                      .add_task_popup_dialog_warning_task_description_empty,
                   false,
-                  (text) {
-                    debugPrint('onEditChanged : $text');
-                    taskModelNew.taskDescription = text;
-                  },
-                  (text) {
-                    debugPrint('onSubmitted : $text');
-                  },
+                  taskDescriptionEditingController,
                 ),
                 const SizedBox(
                   height: 14,
@@ -94,6 +85,10 @@ void showAddTaskPopupDialogWidget(BuildContext context) {
                       }));
                       break;
                     case ETaskSettingItemType.confirm:
+                      taskModelNew.taskName = taskNameEditingController.text;
+                      taskModelNew.taskDescription =
+                          taskDescriptionEditingController.text;
+
                       if (taskModelNew.taskName.isEmpty) {
                         noticeToast(S.current
                             .add_task_popup_dialog_warning_task_name_empty);

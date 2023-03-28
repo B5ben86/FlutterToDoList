@@ -19,11 +19,6 @@ class TaskListWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               return _buildListItem(context, index);
             },
-            // itemCount: GetIt.I<TaskModelsStore>().taskModelMap.length,
-            // itemCount: context.select<TaskModelMapChangeNotifier, int>(
-            //     (taskModelMapChangeNotifier) =>
-            //         taskModelMapChangeNotifier.taskModelMap.length + 1),
-            // itemCount: 5,
             itemCount: context.select(
                 (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
                     taskModelMapChangeNotifier.length + 1),
@@ -43,7 +38,6 @@ class TaskListWidget extends StatelessWidget {
         var taskModelList =
             context.read<TaskModelMapChangeNotifier>().taskModelList;
         var taskModel = taskModelList[index - 1]!;
-        // debugPrint('update index : $index');
         return TaskInfoItemWidget(taskModel, (taskModel) {
           NavigateHandler().push(context, TaskEditPage(taskModel));
         });

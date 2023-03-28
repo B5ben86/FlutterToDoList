@@ -11,6 +11,12 @@ void showModifyTaskTitleInfoPopupDialogWidget(
   showDialog(
     context: context,
     builder: (context) {
+      TextEditingController taskNameEditingController =
+          TextEditingController.fromValue(TextEditingValue(text: taskTitleRaw));
+      TextEditingController taskDescriptionEditingController =
+          TextEditingController.fromValue(
+              TextEditingValue(text: taskDescriptionRaw));
+
       return Dialog(
         elevation: 0,
         insetPadding: const EdgeInsets.only(left: 8, right: 8),
@@ -35,31 +41,18 @@ void showModifyTaskTitleInfoPopupDialogWidget(
                   height: 16,
                 ),
                 buildPopupDialogInputTextFieldWidget(
-                  taskTitleRaw,
-                  'Please Input Task Name',
+                  S.current.add_task_popup_dialog_warning_task_name_empty,
                   true,
-                  (text) {
-                    debugPrint('onEditChanged : $text');
-                    taskTitleRaw = text;
-                  },
-                  (text) {
-                    debugPrint('onSubmitted : $text');
-                  },
+                  taskNameEditingController,
                 ),
                 const SizedBox(
                   height: 14,
                 ),
                 buildPopupDialogInputTextFieldWidget(
-                  taskDescriptionRaw,
-                  'Please Input Task Description',
+                  S.current
+                      .add_task_popup_dialog_warning_task_description_empty,
                   false,
-                  (text) {
-                    debugPrint('onEditChanged : $text');
-                    taskDescriptionRaw = text;
-                  },
-                  (text) {
-                    debugPrint('onSubmitted : $text');
-                  },
+                  taskDescriptionEditingController,
                 ),
                 const SizedBox(
                   height: 28,
@@ -71,7 +64,10 @@ void showModifyTaskTitleInfoPopupDialogWidget(
                     Navigator.pop(context),
                   },
                   () => {
-                    confirmEdit(taskTitleRaw, taskDescriptionRaw),
+                    confirmEdit(
+                      taskNameEditingController.text,
+                      taskDescriptionEditingController.text,
+                    ),
                     Navigator.pop(context),
                   },
                 ),

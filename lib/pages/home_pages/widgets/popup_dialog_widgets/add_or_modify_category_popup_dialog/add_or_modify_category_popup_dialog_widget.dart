@@ -35,6 +35,8 @@ void showAddOrModifyCategoryPopupDialogWidget(
       var selectedColorIndex = 0;
       var selectedIconIndex = 0;
       var categoryName = '';
+      var textEditingController =
+          TextEditingController.fromValue(TextEditingValue(text: categoryName));
 
       if (modelToEdit == null) {
         modelToEdit = CategoryModel('', 0, 0);
@@ -71,16 +73,10 @@ void showAddOrModifyCategoryPopupDialogWidget(
                         S.current.add_category_popup_dialog_name_title),
                     buildEmptyDivider(16),
                     buildPopupDialogInputTextFieldWidget(
-                      categoryName,
                       S.current
                           .add_category_popup_dialog_name_textfield_placeholder,
                       true,
-                      ((onEditChangedText) {
-                        categoryName = onEditChangedText;
-                      }),
-                      ((onSubmittedText) {
-                        categoryName = onSubmittedText;
-                      }),
+                      textEditingController,
                     ),
                     buildEmptyDivider(16),
                     _buildItemTitle(
@@ -118,6 +114,7 @@ void showAddOrModifyCategoryPopupDialogWidget(
                         Navigator.pop(context);
                       }),
                       (() {
+                        categoryName = textEditingController.text;
                         if (categoryName.isNotEmpty) {
                           if (categoryName.length > 6) {
                             noticeToast(S.current

@@ -55,6 +55,8 @@ class _TaskTitleEditItemWidgetState extends State<TaskTitleEditItemWidget> {
                   taskTitleTmp,
                   taskDescriptionTmp,
                   ((taskTitleNew, taskDescriptionNew) {
+                    taskTitleTmp = taskTitleNew;
+                    taskDescriptionTmp = taskDescriptionNew;
                     widget.modifyConfirmCallback(
                         taskTitleNew, taskDescriptionNew);
                   }),
