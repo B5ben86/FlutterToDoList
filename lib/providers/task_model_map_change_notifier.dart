@@ -7,8 +7,28 @@ import 'package:uptodo/models/task_model/task_model.dart';
 class TaskModelMapChangeNotifier with ChangeNotifier, DiagnosticableTreeMixin {
   Map<String, TaskModel> taskModelMap = Map.of({});
 
-  get taskModelList {
+  List<TaskModel> get taskModelList {
     return taskModelMap.values.toList();
+  }
+
+  List<TaskModel> get todoTaskModeList {
+    List<TaskModel> newList = List.of([]);
+    taskModelMap.forEach((key, value) {
+      if (value.finished != true) {
+        newList.add(value);
+      }
+    });
+    return newList;
+  }
+
+  List<TaskModel> get completedTaskModelList {
+    List<TaskModel> newList = List.of([]);
+    taskModelMap.forEach((key, value) {
+      if (value.finished == true) {
+        newList.add(value);
+      }
+    });
+    return newList;
   }
 
   get length {
