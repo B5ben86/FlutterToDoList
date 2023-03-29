@@ -60,7 +60,7 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
   }
 
   Widget buildCheckBox() {
-    debugPrint('build checkbox: ${widget.taskModel.id}');
+    // debugPrint('build checkbox: ${widget.taskModel.id}');
     var finishedRaw = context.select(
             (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
                 taskModelMapChangeNotifier
@@ -109,7 +109,7 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
   }
 
   Widget buildClassifyAndPriorityWidget() {
-    debugPrint('build classify and priority widget: ${widget.taskModel.id}');
+    // debugPrint('build classify and priority widget: ${widget.taskModel.id}');
 
     var categoryModel = context.select(
       (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
@@ -138,7 +138,7 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
   }
 
   Widget buildTaskTime() {
-    debugPrint('build taskTime: ${widget.taskModel.id}');
+    // debugPrint('build taskTime: ${widget.taskModel.id}');
     var dateTime = context.select(
         (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
             taskModelMapChangeNotifier
@@ -153,7 +153,7 @@ class _TaskInfoItemWidgetState extends State<TaskInfoItemWidget> {
   }
 
   Widget buildTaskName() {
-    debugPrint('build taskName: ${widget.taskModel.id}');
+    // debugPrint('build taskName: ${widget.taskModel.id}');
     var taskName = context.select(
       (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
           taskModelMapChangeNotifier

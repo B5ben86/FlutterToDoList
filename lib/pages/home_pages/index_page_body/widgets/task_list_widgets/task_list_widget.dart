@@ -29,7 +29,7 @@ class TaskListWidget extends StatelessWidget {
   }
 
   Widget _buildListItem(BuildContext context, int index) {
-    debugPrint('list item build : $index');
+    // debugPrint('list item build : $index');
     if (index == 0) {
       //TODO: 如何更优雅处理 headerSection
       return const TaskClassifyHeaderSectionWidget(EHeaderSectionType.today);

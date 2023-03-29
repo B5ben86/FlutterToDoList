@@ -35,14 +35,6 @@ class TaskModelMapChangeNotifier with ChangeNotifier, DiagnosticableTreeMixin {
     }
   }
 
-  // void updateTaskModelFinished(String id, bool finished) {
-  //   if (taskModelMap[id]?.finished != finished) {
-  //     taskModelMap[id]?.finished = finished;
-  //     notifyListeners();
-  //     _saveToDatabase();
-  //   }
-  // }
-
   void clear() {
     taskModelMap.clear();
     notifyListeners();

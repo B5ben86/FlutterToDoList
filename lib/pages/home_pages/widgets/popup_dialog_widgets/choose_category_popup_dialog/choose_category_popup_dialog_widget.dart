@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'package:uptodo/generated/l10n.dart';
 import 'package:uptodo/models/category_model/category_model.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/add_or_modify_category_popup_dialog/add_or_modify_category_popup_dialog_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/choose_category_popup_dialog/items/category_item_widget.dart';
-import 'package:uptodo/stores/category_models_store.dart';
+import 'package:uptodo/providers/category_model_map_change_notifier.dart';
 import 'package:uptodo/utility/tools/navigation_service.dart';
 
 void showChooseCategoryPopupDialogWidget(BuildContext context,
@@ -122,12 +122,17 @@ class _CategoryGridViewWidgetState extends State<CategoryGridViewWidget> {
                 childAspectRatio: 64 / 90,
                 mainAxisSpacing: 16,
                 crossAxisSpacing: 30),
-            itemCount: GetIt.I<CategoryModelsStore>().modelMap.length,
+            itemCount: context.select((CategoryModelMapChangeNotifier
+                    categoryModelMapChangeNotifier) =>
+                categoryModelMapChangeNotifier.modelMap.length),
             itemBuilder: ((context, index) {
-              var categoryModel = GetIt.I<CategoryModelsStore>()
-                  .modelMap
-                  .values
-                  .toList()[index];
+              var categoryModel = context
+                  .watch<CategoryModelMapChangeNotifier>()
+                  .getModelList[index];
+              // var categoryModel = GetIt.I<CategoryModelsStore>()
+              //     .modelMap
+              //     .values
+              //     .toList()[index];
               return CategoryItemWidget(categoryModel, (() {
                 widget.onSelected(categoryModel);
               }));

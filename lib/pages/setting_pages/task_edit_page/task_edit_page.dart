@@ -43,7 +43,6 @@ class _TaskEditPageState extends State<TaskEditPage> {
     return Scaffold(
       appBar: TaskEditPageAppBarWidget(
         () {
-          debugPrint('close button');
           Navigator.pop(context);
         },
         () {

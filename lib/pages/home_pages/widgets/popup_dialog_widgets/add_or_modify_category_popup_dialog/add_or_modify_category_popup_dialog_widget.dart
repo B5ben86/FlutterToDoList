@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'package:uptodo/generated/l10n.dart';
 import 'package:uptodo/models/category_model/category_model.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/add_or_modify_category_popup_dialog/items/color_select_widget.dart';
@@ -7,7 +7,7 @@ import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/add_or_modi
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/popup_common_widgets/build_popup_dialog_input_text_field_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/popup_common_widgets/popup_dialog_bottom_buttons_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/toast_widgets/notice_popup_toast/notice_toast.dart';
-import 'package:uptodo/stores/category_models_store.dart';
+import 'package:uptodo/providers/category_model_map_change_notifier.dart';
 import 'package:uptodo/widgets/empty_divider_widget.dart';
 
 enum CategoryPopupDialogType {
@@ -107,8 +107,11 @@ void showAddOrModifyCategoryPopupDialogWidget(
                       (() {
                         if (dialogType == CategoryPopupDialogType.add) {
                         } else {
-                          GetIt.I<CategoryModelsStore>()
+                          context
+                              .read<CategoryModelMapChangeNotifier>()
                               .deleteModel(modelToEdit!.id);
+                          // GetIt.I<CategoryModelsStore>()
+                          //     .deleteModel(modelToEdit!.id);
                         }
                         cancelOrDeleteButtonPressed();
                         Navigator.pop(context);
@@ -125,15 +128,21 @@ void showAddOrModifyCategoryPopupDialogWidget(
                                   categoryName,
                                   selectedColorIndex,
                                   selectedIconIndex);
-                              GetIt.I<CategoryModelsStore>()
+                              context
+                                  .read<CategoryModelMapChangeNotifier>()
                                   .insertModel(categoryModelNew);
+                              // GetIt.I<CategoryModelsStore>()
+                              //     .insertModel(categoryModelNew);
                               confirmButtonPressed();
                             } else {
                               modelToEdit?.name = categoryName;
                               modelToEdit?.colorNum = selectedColorIndex;
                               modelToEdit?.iconNum = selectedIconIndex;
-                              GetIt.I<CategoryModelsStore>()
+                              context
+                                  .read<CategoryModelMapChangeNotifier>()
                                   .updateModel(modelToEdit!);
+                              // GetIt.I<CategoryModelsStore>()
+                              //     .updateModel(modelToEdit!);
                               confirmButtonPressed();
                             }
                             Navigator.pop(context);

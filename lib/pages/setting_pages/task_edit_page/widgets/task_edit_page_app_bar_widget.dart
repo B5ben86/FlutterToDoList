@@ -41,12 +41,15 @@ class _TaskEditPageAppBarWidgetState extends State<TaskEditPageAppBarWidget> {
   Widget buildAvatarButton() {
     return Padding(
       padding: const EdgeInsets.only(right: 24),
-      child: SizedBox(
-        height: 32,
-        width: 32,
-        child: IconButton(
-          onPressed: widget.refreshButtonClick,
-          icon: const Icon(Icons.cached),
+      child: Visibility(
+        visible: false,
+        child: SizedBox(
+          height: 32,
+          width: 32,
+          child: IconButton(
+            onPressed: widget.refreshButtonClick,
+            icon: const Icon(Icons.cached),
+          ),
         ),
       ),
     );
