@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uptodo/generated/l10n.dart';
-import 'package:uptodo/models/category_model/category_model.dart';
 import 'package:uptodo/models/task_model/task_model.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/add_task_popup_dialog/items/build_task_detail_setting_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/add_task_popup_dialog/items/build_title_text_widget.dart';
@@ -10,14 +9,21 @@ import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/choose_cate
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/choose_task_priority_popup_dialog/choose_task_priority_popup_dialog_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/popup_common_widgets/build_popup_dialog_input_text_field_widget.dart';
 import 'package:uptodo/pages/home_pages/widgets/toast_widgets/notice_popup_toast/notice_toast.dart';
+import 'package:uptodo/providers/category_model_map_change_notifier.dart';
 import 'package:uptodo/providers/task_model_map_change_notifier.dart';
 
-void showAddTaskPopupDialogWidget(BuildContext context) {
+void showAddTaskPopupDialogWidget(
+    BuildContext context, DateTime defaultDateTime) {
   showDialog(
     context: context,
     builder: (context) {
-      var taskModelNew =
-          TaskModel('', '', DateTime.now(), 0, CategoryModel('', 0, 0), false);
+      var taskModelNew = TaskModel(
+          '',
+          '',
+          defaultDateTime,
+          0,
+          context.read<CategoryModelMapChangeNotifier>().getModelList[0],
+          false);
 
       var taskNameEditingController = TextEditingController();
       var taskDescriptionEditingController = TextEditingController();

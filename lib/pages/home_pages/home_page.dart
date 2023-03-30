@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:uptodo/pages/home_pages/calendar_page_body/calendar_page_body.dart';
+import 'package:uptodo/pages/home_pages/focus_page_body/focus_page_body.dart';
+import 'package:uptodo/pages/home_pages/index_page_body/index_page_body.dart';
+import 'package:uptodo/pages/home_pages/profile_page_body/profile_page_body.dart';
 import 'package:uptodo/pages/home_pages/widgets/popup_dialog_widgets/add_task_popup_dialog/add_task_popup_dialog_widget.dart';
 
-import 'calendar_page_body/calendar_page_body.dart';
-import 'focus_page_body/focus_page_body.dart';
-import 'index_page_body/index_page_body.dart';
-import 'profile_page_body/profile_page_body.dart';
 import 'widgets/home_page_app_bar_widget.dart';
 import 'widgets/home_page_bottom_bar_widget.dart';
 
@@ -18,12 +18,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var floatingButtonVisible = true;
   var currentTapIndex = 0;
-  var bodyContentList = [
-    const IndexPageBody(),
-    const CalendarPageBody(),
-    const FocusPageBody(),
-    const ProfilePageBody()
-  ];
+  var calendarPageBodyGlobalKey = GlobalKey<CalendarPageBodyState>();
+  var bodyContentList = List.of([]);
+
+  @override
+  void initState() {
+    super.initState();
+    bodyContentList = [
+      const IndexPageBody(),
+      CalendarPageBody(
+        key: calendarPageBodyGlobalKey,
+      ),
+      const FocusPageBody(),
+      const ProfilePageBody()
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,19 +99,25 @@ class _HomePageState extends State<HomePage> {
   }
 
   void addButtonHandle() {
-    if (currentTapIndex == 0) {
+    if (currentTapIndex == 0 || currentTapIndex == 1) {
       debugPrint('press add button in index page');
-      // var taskModelNew = TaskModel(
-      //   'taskName',
-      //   DateTime.now(),
-      //   ETaskPriority.high,
-      //   CategoryModel('name', 1, 3),
-      //   false,
-      // );
-      // // context.read<TaskModelsStore>().insertTaskModel(taskModelNew);
-      // GetIt.I<TaskModelsStore>().insertTaskModel(taskModelNew);
-
-      showAddTaskPopupDialogWidget(context);
+      var dateTime = DateTime.now();
+      if (currentTapIndex == 1) {
+        var selectedDateTime =
+            calendarPageBodyGlobalKey.currentState?.selectedDayTmp;
+        if (selectedDateTime != null) {
+          var dateTimeTmp = DateTime(
+            selectedDateTime.year,
+            selectedDateTime.month,
+            selectedDateTime.day,
+            dateTime.hour,
+            dateTime.minute,
+            dateTime.second,
+          );
+          dateTime = dateTimeTmp;
+        }
+      }
+      showAddTaskPopupDialogWidget(context, dateTime);
     }
   }
 }

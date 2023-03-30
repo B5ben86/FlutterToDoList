@@ -31,6 +31,20 @@ class TaskModelMapChangeNotifier with ChangeNotifier, DiagnosticableTreeMixin {
     return newList;
   }
 
+  List<TaskModel> taskModelListInOneDay(DateTime dateTime, bool isFinished) {
+    List<TaskModel> newList = List.of([]);
+    taskModelMap.forEach((key, value) {
+      if (value.finished == isFinished) {
+        if (value.dateTime.year == dateTime.year &&
+            value.dateTime.month == dateTime.month &&
+            value.dateTime.day == dateTime.day) {
+          newList.add(value);
+        }
+      }
+    });
+    return newList;
+  }
+
   get length {
     return taskModelMap.length;
   }

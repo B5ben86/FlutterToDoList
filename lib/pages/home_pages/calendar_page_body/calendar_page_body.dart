@@ -1,45 +1,97 @@
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:provider/provider.dart';
+import 'package:uptodo/models/task_model/task_model.dart';
+import 'package:uptodo/pages/home_pages/calendar_page_body/widgets/calendar_select_widget.dart';
+import 'package:uptodo/pages/home_pages/index_page_body/widgets/task_list_widgets/task_classify_header_section/task_classify_header_section_widget.dart';
+import 'package:uptodo/pages/home_pages/index_page_body/widgets/task_list_widgets/task_classify_header_section/task_classify_sliver_header_delegate.dart';
+import 'package:uptodo/pages/home_pages/index_page_body/widgets/task_list_widgets/task_info_item/task_info_item_widget.dart';
+import 'package:uptodo/pages/setting_pages/task_edit_page/task_edit_page.dart';
+import 'package:uptodo/providers/task_model_map_change_notifier.dart';
+import 'package:uptodo/utility/tools/navigate_handler.dart';
 
 class CalendarPageBody extends StatefulWidget {
   const CalendarPageBody({super.key});
 
   @override
-  State<CalendarPageBody> createState() => _CalendarPageBodyState();
+  State<CalendarPageBody> createState() => CalendarPageBodyState();
 }
 
-class _CalendarPageBodyState extends State<CalendarPageBody> {
+class CalendarPageBodyState extends State<CalendarPageBody> {
   DateTime selectedDayTmp = DateTime.now();
-  DateTime focusedDayTmp = DateTime.now();
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: TableCalendar(
-        focusedDay: focusedDayTmp,
-        currentDay: selectedDayTmp,
-        firstDay: DateTime.utc(2021, 1, 1),
-        lastDay: DateTime.utc(2024, 1, 1),
-        selectedDayPredicate: (day) {
-          return isSameDay(selectedDayTmp, day);
-        },
-        onDaySelected: (selectedDay, focusedDay) {
-          if (!isSameDay(selectedDayTmp, selectedDay)) {
+    return Column(
+      children: [
+        CalendarSelectWidget(
+          (dateTime) => {
+            debugPrint('on day selected : $dateTime'),
             setState(() {
-              selectedDayTmp = selectedDay;
-              focusedDayTmp = focusedDay;
-            });
-          }
+              selectedDayTmp = dateTime;
+            }),
+          },
+        ),
+        _buildListView(selectedDayTmp),
+      ],
+    );
+  }
 
-          debugPrint(focusedDay.toIso8601String());
-          debugPrint(selectedDay.toIso8601String());
-
-          debugPrint(focusedDayTmp.toIso8601String());
-          debugPrint(selectedDayTmp.toIso8601String());
-        },
-        onPageChanged: (focusedDay) {
-          focusedDayTmp = focusedDay;
-        },
+  Widget _buildListView(DateTime dateTime) {
+    return Expanded(
+      child: CustomScrollView(
+        slivers: [
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: TaskClassifySliverHeaderDelegate(
+                headerSectionType: EHeaderSectionType.today),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                var taskModelList = context
+                    .read<TaskModelMapChangeNotifier>()
+                    .taskModelListInOneDay(dateTime, false);
+                return _buildListItem(context, index, taskModelList);
+              },
+              childCount: context.select(
+                  (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
+                      taskModelMapChangeNotifier
+                          .taskModelListInOneDay(dateTime, false)
+                          .length),
+            ),
+          ),
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: TaskClassifySliverHeaderDelegate(
+                headerSectionType: EHeaderSectionType.completed),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                var taskModelList = context
+                    .read<TaskModelMapChangeNotifier>()
+                    .taskModelListInOneDay(dateTime, true);
+                return _buildListItem(context, index, taskModelList);
+              },
+              childCount: context.select(
+                  (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
+                      taskModelMapChangeNotifier
+                          .taskModelListInOneDay(dateTime, true)
+                          .length),
+            ),
+          ),
+        ],
       ),
     );
+  }
+
+  Widget _buildListItem(
+      BuildContext context, int index, List<TaskModel> taskModelList) {
+    debugPrint('sliver list item build : $index');
+    return Builder(builder: (context) {
+      var taskModel = taskModelList[index];
+      return TaskInfoItemWidget(taskModel, (taskModel) {
+        NavigateHandler().push(context, TaskEditPage(taskModel));
+      });
+    });
   }
 }

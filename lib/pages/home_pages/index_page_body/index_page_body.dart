@@ -22,7 +22,6 @@ class _IndexPageBodyState extends State<IndexPageBody> {
         context.read<TaskModelMapChangeNotifier>();
     return Observer(
       builder: (observerContext) {
-        // if (GetIt.I<TaskModelsStore>().isEmpty) {
         if (taskModelMapChangeNotifier.taskModelMap.isEmpty) {
           return const NoTasksWidget();
         } else {
@@ -49,28 +48,4 @@ class _IndexPageBodyState extends State<IndexPageBody> {
       ]),
     );
   }
-
-  // Widget buildListView() {
-  //   return Expanded(
-  //     child: Observer(
-  //       builder: (context) {
-  //         debugPrint(
-  //             'tasks amount : ${GetIt.I<TaskModelsStore>().taskModelMap.length}');
-  //         return ListView.builder(
-  //           itemBuilder: (context, index) {
-  //             var taskModel = GetIt.I<TaskModelsStore>()
-  //                 .taskModelMap
-  //                 .values
-  //                 .toList()[index];
-  //             return TaskInfoItemWidget(taskModel, (taskModel) {
-  //               debugPrint(
-  //                   'TaskInfoItemWidget on click : ${taskModel.toJson()}');
-  //             });
-  //           },
-  //           itemCount: GetIt.I<TaskModelsStore>().taskModelMap.length,
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }
 }
