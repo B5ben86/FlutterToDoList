@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uptodo/models/task_model/task_model.dart';
 import 'package:uptodo/pages/home_pages/calendar_page_body/widgets/calendar_select_widget.dart';
+import 'package:uptodo/pages/home_pages/index_page_body/widgets/no_tasks_widget.dart';
 import 'package:uptodo/pages/home_pages/index_page_body/widgets/task_list_widgets/task_classify_header_section/task_classify_header_section_widget.dart';
 import 'package:uptodo/pages/home_pages/index_page_body/widgets/task_list_widgets/task_classify_header_section/task_classify_sliver_header_delegate.dart';
 import 'package:uptodo/pages/home_pages/index_page_body/widgets/task_list_widgets/task_info_item/task_info_item_widget.dart';
@@ -20,9 +21,24 @@ class CalendarPageBodyState extends State<CalendarPageBody> {
   DateTime selectedDayTmp = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    var dateTimeRange =
+        context.watch<TaskModelMapChangeNotifier>().taskModelDateTimeRange;
+
+    if (selectedDayTmp.isAfter(dateTimeRange.end)) {
+      setState(() {
+        selectedDayTmp = dateTimeRange.end;
+      });
+    } else if (selectedDayTmp.isBefore(dateTimeRange.start)) {
+      setState(() {
+        selectedDayTmp = dateTimeRange.start;
+      });
+    }
+
     return Column(
       children: [
         CalendarSelectWidget(
+          selectedDayTmp,
+          dateTimeRange,
           (dateTime) => {
             debugPrint('on day selected : $dateTime'),
             setState(() {
@@ -36,52 +52,68 @@ class CalendarPageBodyState extends State<CalendarPageBody> {
   }
 
   Widget _buildListView(DateTime dateTime) {
-    return Expanded(
-      child: CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: TaskClassifySliverHeaderDelegate(
-                headerSectionType: EHeaderSectionType.today),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                var taskModelList = context
-                    .read<TaskModelMapChangeNotifier>()
-                    .taskModelListInOneDay(dateTime, false);
-                return _buildListItem(context, index, taskModelList);
-              },
-              childCount: context.select(
-                  (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
-                      taskModelMapChangeNotifier
-                          .taskModelListInOneDay(dateTime, false)
-                          .length),
+    var todoTaskModelList = context
+        .read<TaskModelMapChangeNotifier>()
+        .taskModelListInOneDay(dateTime, false);
+    var completedTaskModelList = context
+        .read<TaskModelMapChangeNotifier>()
+        .taskModelListInOneDay(dateTime, true);
+
+    var totalLength = context.select(
+            (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
+                taskModelMapChangeNotifier
+                    .taskModelListInOneDay(dateTime, false)
+                    .length) +
+        context.select(
+            (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
+                taskModelMapChangeNotifier
+                    .taskModelListInOneDay(dateTime, true)
+                    .length);
+
+    if (totalLength == 0) {
+      return const NoTasksWidget();
+    } else {
+      return Expanded(
+        child: CustomScrollView(
+          slivers: [
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: TaskClassifySliverHeaderDelegate(
+                  headerSectionType: EHeaderSectionType.today),
             ),
-          ),
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: TaskClassifySliverHeaderDelegate(
-                headerSectionType: EHeaderSectionType.completed),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                var taskModelList = context
-                    .read<TaskModelMapChangeNotifier>()
-                    .taskModelListInOneDay(dateTime, true);
-                return _buildListItem(context, index, taskModelList);
-              },
-              childCount: context.select(
-                  (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
-                      taskModelMapChangeNotifier
-                          .taskModelListInOneDay(dateTime, true)
-                          .length),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return _buildListItem(context, index, todoTaskModelList);
+                },
+                childCount: context.select(
+                    (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
+                        taskModelMapChangeNotifier
+                            .taskModelListInOneDay(dateTime, false)
+                            .length),
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: TaskClassifySliverHeaderDelegate(
+                  headerSectionType: EHeaderSectionType.completed),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return _buildListItem(context, index, completedTaskModelList);
+                },
+                childCount: context.select(
+                    (TaskModelMapChangeNotifier taskModelMapChangeNotifier) =>
+                        taskModelMapChangeNotifier
+                            .taskModelListInOneDay(dateTime, true)
+                            .length),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   Widget _buildListItem(

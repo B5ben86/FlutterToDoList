@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:uptodo/mock/task_model_mock_database.dart';
 import 'package:uptodo/models/task_model/task_model.dart';
 
@@ -29,6 +30,23 @@ class TaskModelMapChangeNotifier with ChangeNotifier, DiagnosticableTreeMixin {
       }
     });
     return newList;
+  }
+
+  DateTimeRange get taskModelDateTimeRange {
+    DateTime startDate = DateTime.now();
+    DateTime endDate = DateTime(2017, 1, 1, 0, 0);
+
+    taskModelMap.forEach((key, value) {
+      if (value.dateTime.isBefore(startDate)) {
+        startDate = value.dateTime;
+      }
+      if (value.dateTime.isAfter(endDate)) {
+        endDate = value.dateTime;
+      }
+    });
+
+    DateTimeRange dateTimeRange = DateTimeRange(start: startDate, end: endDate);
+    return dateTimeRange;
   }
 
   List<TaskModel> taskModelListInOneDay(DateTime dateTime, bool isFinished) {
