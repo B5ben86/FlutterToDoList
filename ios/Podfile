@@ -38,4 +38,14 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
   end
+
+  #升级xcode 16.4后，必须保证最低 target 为 11.0, 否则编译失败
+  #https://stackoverflow.com/questions/75900795/cant-run-flutter-app-on-simulator-after-upgrading-xcode-to-14-3-because-of-miss
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+            target.build_configurations.each do |config|
+                config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+            end
+        end
+    end
 end

@@ -36,7 +36,7 @@
 
   "home_page_bottom_app_bar_index": "索引",
   "home_page_bottom_app_bar_calendar": "日历",
-  "home_page_bottom_app_bar_focus": "专注",
+  "home_page_bottom_app_bar_focus": "专注模式",
   "home_page_bottom_app_bar_profile": "资料",
 
   "index_body_empty_notice": "今天有什么要做的吗？",
@@ -76,5 +76,8 @@
   "edit_task_page_item_title_delete_task": "删除任务",
   "edit_task_page_confirm_edit_button_text": "确认修改",
   "edit_task_delete_task_popup_dialog_title_text": "任务名称",
-  "edit_task_delete_task_popup_dialog_warning_text": "确定删除任务吗?"
+  "edit_task_delete_task_popup_dialog_warning_text": "确定删除任务吗?",
+
+  "focus_mode_page_start_focusing_button_text": "开始专注模式",
+  "focus_mode_page_stop_focusing_button_text": "停止专注模式"
 }

@@ -33,19 +33,25 @@ class TaskModelMapChangeNotifier with ChangeNotifier, DiagnosticableTreeMixin {
   }
 
   DateTimeRange get taskModelDateTimeRange {
-    DateTime startDate = DateTime.now();
-    DateTime endDate = DateTime(2017, 1, 1, 0, 0);
+    DateTimeRange dateTimeRange =
+        DateTimeRange(start: DateTime.now(), end: DateTime.now());
 
-    taskModelMap.forEach((key, value) {
-      if (value.dateTime.isBefore(startDate)) {
-        startDate = value.dateTime;
-      }
-      if (value.dateTime.isAfter(endDate)) {
-        endDate = value.dateTime;
-      }
-    });
+    if (taskModelMap.isNotEmpty) {
+      DateTime startDate = DateTime.now();
+      DateTime endDate = DateTime(2017, 1, 1, 0, 0);
+      taskModelMap.forEach(
+        (key, value) {
+          if (value.dateTime.isBefore(startDate)) {
+            startDate = value.dateTime;
+          }
+          if (value.dateTime.isAfter(endDate)) {
+            endDate = value.dateTime;
+          }
+        },
+      );
+      dateTimeRange = DateTimeRange(start: startDate, end: endDate);
+    }
 
-    DateTimeRange dateTimeRange = DateTimeRange(start: startDate, end: endDate);
     return dateTimeRange;
   }
 

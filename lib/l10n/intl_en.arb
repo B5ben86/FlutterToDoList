@@ -36,7 +36,7 @@
 
   "home_page_bottom_app_bar_index": "Index",
   "home_page_bottom_app_bar_calendar": "Calendar",
-  "home_page_bottom_app_bar_focus": "Focus",
+  "home_page_bottom_app_bar_focus": "Focus Mode",
   "home_page_bottom_app_bar_profile": "Profile",
 
   "index_body_empty_notice": "What do you want to do today?",
@@ -76,5 +76,8 @@
   "edit_task_page_item_title_delete_task": "Delete Task",
   "edit_task_page_confirm_edit_button_text": "Edit Task",
   "edit_task_delete_task_popup_dialog_title_text": "Task Title",
-  "edit_task_delete_task_popup_dialog_warning_text": "Are you sure to delete this task?"
+  "edit_task_delete_task_popup_dialog_warning_text": "Are you sure to delete this task?",
+
+  "focus_mode_page_start_focusing_button_text": "Start Focusing",
+  "focus_mode_page_stop_focusing_button_text": "Stop Focusing"
 }

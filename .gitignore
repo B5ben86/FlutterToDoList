@@ -49,3 +49,4 @@ lib/models/task_model/*.g.dart
 lib/stores/*.g.dart
 
 lib/generated/*
+lib/models/focus_record_model/focus_record_model.g.dart
