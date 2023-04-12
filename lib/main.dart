@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:uptodo/generated/l10n.dart';
 import 'package:uptodo/pages/welcome_pages/welcome_page.dart';
 import 'package:uptodo/providers/category_model_map_change_notifier.dart';
+import 'package:uptodo/providers/focus_record_model_map_change_notifier.dart';
 import 'package:uptodo/providers/task_model_map_change_notifier.dart';
 import 'package:uptodo/utility/get_it_initial/get_it_initial.dart';
 import 'package:uptodo/utility/tools/navigation_service.dart';
@@ -16,6 +17,8 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => TaskModelMapChangeNotifier()),
         ChangeNotifierProvider(create: (_) => CategoryModelMapChangeNotifier()),
+        ChangeNotifierProvider(
+            create: (_) => FocusRecordModelMapChangeNotifier()),
       ],
       child: const MyApp(),
     ),

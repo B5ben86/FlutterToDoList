@@ -79,5 +79,10 @@
   "edit_task_delete_task_popup_dialog_warning_text": "Are you sure to delete this task?",
 
   "focus_mode_page_start_focusing_button_text": "Start Focusing",
-  "focus_mode_page_stop_focusing_button_text": "Stop Focusing"
+  "focus_mode_page_stop_focusing_button_text": "Stop Focusing",
+  "focus_mode_bar_char_title_text":"OverView",
+  "focus_mode_bar_char_type_button_this_week":"This Week",
+  "focus_mode_bar_char_type_button_this_month":"This Month",
+  "focus_mode_bar_char_type_button_this_year":"This Year"
+
 }

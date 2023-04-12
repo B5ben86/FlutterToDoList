@@ -8,6 +8,7 @@ import 'package:uptodo/pages/login_register_pages/login_page.dart';
 import 'package:uptodo/pages/login_register_pages/register_page.dart';
 import 'package:uptodo/pages/welcome_pages/intro_page_display_handle.dart';
 import 'package:uptodo/providers/category_model_map_change_notifier.dart';
+import 'package:uptodo/providers/focus_record_model_map_change_notifier.dart';
 import 'package:uptodo/providers/task_model_map_change_notifier.dart';
 import 'package:uptodo/utility/tools/navigate_handler.dart';
 
@@ -95,6 +96,7 @@ class _IntroLastPageState extends State<IntroLastPage> {
       context.read<TaskModelMapChangeNotifier>().loadFromDatabase();
       // GetIt.I<CategoryModelsStore>().loadFromDatabase();
       context.read<CategoryModelMapChangeNotifier>().loadFromDatabase();
+      context.read<FocusRecordModelMapChangeNotifier>().loadFromDatabase();
       await Future.delayed(const Duration(seconds: 1));
       //若已登录，则跳转到 HomePage
       if (mounted) {

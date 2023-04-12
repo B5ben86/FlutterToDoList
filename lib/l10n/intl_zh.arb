@@ -79,5 +79,9 @@
   "edit_task_delete_task_popup_dialog_warning_text": "确定删除任务吗?",
 
   "focus_mode_page_start_focusing_button_text": "开始专注模式",
-  "focus_mode_page_stop_focusing_button_text": "停止专注模式"
+  "focus_mode_page_stop_focusing_button_text": "停止专注模式",
+  "focus_mode_bar_char_title_text": "总览",
+  "focus_mode_bar_char_type_button_this_week": "周",
+  "focus_mode_bar_char_type_button_this_month": "月",
+  "focus_mode_bar_char_type_button_this_year": "年"
 }

@@ -5,9 +5,19 @@ part 'focus_record_model.g.dart';
 @JsonSerializable()
 class FocusRecordModel {
   DateTime startRecordDateTime;
-  int focusSeconds;
+  DateTime stopRecordDateTime;
+  int _focusSeconds = 0;
 
-  FocusRecordModel(this.startRecordDateTime, this.focusSeconds);
+  FocusRecordModel(this.startRecordDateTime, this.stopRecordDateTime);
+
+  void calculateFocusSeconds() {
+    _focusSeconds =
+        stopRecordDateTime.difference(startRecordDateTime).inSeconds;
+  }
+
+  int getFocusSeconds() {
+    return _focusSeconds;
+  }
 
   factory FocusRecordModel.fromJson(Map<String, dynamic> json) =>
       _$FocusRecordModelFromJson(json);
