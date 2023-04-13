@@ -51,9 +51,9 @@ class FocusRecordModelMapChangeNotifier
       }
     }
 
-    debugPrint(
-        'startDay = $startDay, endDay = $endDay, weekday = ${dateTime.weekday}');
-    debugPrint('$durationList');
+    // debugPrint(
+    //     'startDay = $startDay, endDay = $endDay, weekday = ${dateTime.weekday}');
+    // debugPrint('$durationList');
     return durationList;
   }
 

@@ -80,9 +80,15 @@
 
   "focus_mode_page_start_focusing_button_text": "Start Focusing",
   "focus_mode_page_stop_focusing_button_text": "Stop Focusing",
-  "focus_mode_bar_char_title_text":"OverView",
-  "focus_mode_bar_char_type_button_this_week":"This Week",
-  "focus_mode_bar_char_type_button_this_month":"This Month",
-  "focus_mode_bar_char_type_button_this_year":"This Year"
-
+  "focus_mode_bar_char_title_text": "OverView",
+  "focus_mode_bar_char_type_button_this_week": "This Week",
+  "focus_mode_bar_char_type_button_this_month": "This Month",
+  "focus_mode_bar_char_type_button_this_year": "This Year",
+  "focus_mode_bar_char_bottom_title_sunday": "SUN",
+  "focus_mode_bar_char_bottom_title_monday": "MON",
+  "focus_mode_bar_char_bottom_title_tuesday":"TUE",
+  "focus_mode_bar_char_bottom_title_wednesday":"WED",
+  "focus_mode_bar_char_bottom_title_thursday":"THU",
+  "focus_mode_bar_char_bottom_title_friday":"FRI",
+  "focus_mode_bar_char_bottom_title_saturday":"SAT"
 }

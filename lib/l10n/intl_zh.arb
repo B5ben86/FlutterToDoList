@@ -83,5 +83,12 @@
   "focus_mode_bar_char_title_text": "总览",
   "focus_mode_bar_char_type_button_this_week": "周",
   "focus_mode_bar_char_type_button_this_month": "月",
-  "focus_mode_bar_char_type_button_this_year": "年"
+  "focus_mode_bar_char_type_button_this_year": "年",
+  "focus_mode_bar_char_bottom_title_sunday": "日",
+  "focus_mode_bar_char_bottom_title_monday": "一",
+  "focus_mode_bar_char_bottom_title_tuesday": "二",
+  "focus_mode_bar_char_bottom_title_wednesday": "三",
+  "focus_mode_bar_char_bottom_title_thursday": "四",
+  "focus_mode_bar_char_bottom_title_friday": "五",
+  "focus_mode_bar_char_bottom_title_saturday": "六"
 }
