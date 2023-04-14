@@ -97,7 +97,7 @@ class _IntroLastPageState extends State<IntroLastPage> {
       // GetIt.I<CategoryModelsStore>().loadFromDatabase();
       context.read<CategoryModelMapChangeNotifier>().loadFromDatabase();
       context.read<FocusRecordModelMapChangeNotifier>().loadFromDatabase();
-      await Future.delayed(const Duration(seconds: 1));
+      // await Future.delayed(const Duration(seconds: 1));
       //若已登录，则跳转到 HomePage
       if (mounted) {
         NavigateHandler().pushReplacement(context, const HomePage());

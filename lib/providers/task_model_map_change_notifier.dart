@@ -32,6 +32,14 @@ class TaskModelMapChangeNotifier with ChangeNotifier, DiagnosticableTreeMixin {
     return newList;
   }
 
+  int get todoTaskAmount {
+    return todoTaskModeList.length;
+  }
+
+  int get completedTaskAmount {
+    return completedTaskModelList.length;
+  }
+
   DateTimeRange get taskModelDateTimeRange {
     DateTimeRange dateTimeRange =
         DateTimeRange(start: DateTime.now(), end: DateTime.now());

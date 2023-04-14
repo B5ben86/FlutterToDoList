@@ -90,5 +90,8 @@
   "focus_mode_bar_char_bottom_title_wednesday": "三",
   "focus_mode_bar_char_bottom_title_thursday": "四",
   "focus_mode_bar_char_bottom_title_friday": "五",
-  "focus_mode_bar_char_bottom_title_saturday": "六"
+  "focus_mode_bar_char_bottom_title_saturday": "六",
+
+  "profile_page_task_left": "个已完成",
+  "profile_page_task_done": "个未完成"
 }
